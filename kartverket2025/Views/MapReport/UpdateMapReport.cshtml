@@ -1,0 +1,42 @@
+﻿@model kartverket2025.Models.ViewModels.MapReportViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<h2>Update the user map report</h2>
+
+<form asp-action="UpdateMapReport" method="post">
+    <input type="hidden" asp-for="Id" /> @* This code is used for giving users the opportunity to identify which area they want to change *@
+
+    @* This section consists of four different fields where users can give or edit the data *@
+    <div class="form-group">
+        @* Users can describe the area change *@
+        <label asp-for="ReportDescription">Description</label>
+        <input asp-for="ReportDescription" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        @* JSON-data related to the area can be changes *@
+        <label asp-for="ReportAreaJson">Area JSON</label>
+        <textarea asp-for="ReportAreaJson" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        @* Let users choose the municipality name for the area change *@
+        <label asp-for="ReportKommunenavn">Kommune</label>
+        <input asp-for="ReportKommunenavn" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        @* Let users choose the county name for the area change *@
+        <label asp-for="ReportFylkenavn">Fylke</label>
+        <input asp-for="ReportFylkenavn" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button> @* Let the users save or cancel the changes made *@
+    <a asp-action="AllMapReportsOverview" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,77 @@
+﻿@model kartverket2025.Models.ViewModels.UsersListViewModel
+
+<link rel="stylesheet" href="~/css/reportOverviewTable.css" />
+
+<div class="Title">
+    <h2 class="table-title">Users Overview</h2>
+</div>
+<div class="table-container">
+    <div class="top-section">
+        <form method="get" asp-action="UsersList" class="search-form">
+            <input type="text" name="searchQuery" value="@Model.SearchQuery" placeholder="Søk på e-post, navn, rolle..." />
+            <button type="submit">Søk</button>
+            <input type="hidden" name="pageSize" value="@Model.PageSize" />
+        </form>
+    </div>
+    <div class="table-box">
+        @if (Model.Users != null && Model.Users.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>Full name</th>
+                        <th>Role</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>@user.Id</td>
+                            <td>@user.Email</td>
+                            <td>@user.UserName</td>
+                            <td>@string.Join(", ", user.Roles ?? new List<string>())</td>
+                            <td>
+                                @if (!(user.Roles?.Contains("System Admin") ?? false))
+                                {
+                                    <form method="post"
+                                          asp-controller="Admin"
+                                          asp-action="DelUser" asp-route-id="@user.Id">
+                                        <button class="action-btn delete"
+                                                onclick="return confirm ('Are you sure u wanna delete this user?');"
+                                                type="submit">
+                                            Delete User
+                                        </button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (Model.TotalPages > 1)
+            {
+                <nav class="pagination-nav">
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        if (i == Model.CurrentPage)
+                        {
+                            <span class="pagination-current">@i</span>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("UsersList", new { pageNumber = i, pageSize = Model.PageSize, searchQuery = Model.SearchQuery })" class="pagination-link">@i</a>
+                        }
+                    }
+                </nav>
+            }
+        }
+        else
+        {
+            <div class="alert-info">No users found!</div>
+        }
+    </div>
+</div>

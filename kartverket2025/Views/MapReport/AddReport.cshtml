@@ -1,0 +1,179 @@
+﻿@model kartverket2025.Models.ViewModels.MapReportViewModel
+
+@{
+    ViewData["Title"] = "Add Report";
+}
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<div>
+    <h2>Add Report</h2>
+
+    <!-- Add this div for the map -->
+    <div id="map"></div>
+
+    <!-- Change asp-action to PreviewReport -->
+    <form asp-action="PreviewReport" method="post">
+        @* GeoJSON Data (hidden) *@
+        <input type="hidden" id="geoJsonInput" asp-for="ReportAreaJson" hidden />
+
+        @* Latitude *@
+        <label for="latitude" style="color: white;">Breddegrad</label>
+        <input type="text" id="latitude" name="Latitude" class="form-control" readonly />
+
+        @* Longitude *@
+        <label for="longitude" style="color: white;">Lengdegrad</label>
+        <input type="text" id="longitude" name="Longitude" class="form-control" readonly />
+
+        @* Description *@
+        <label for="description" style="color: white;">Beskrivelse</label>
+        <textarea id="description" asp-for="ReportDescription" class="form-control" placeholder="Skriv her..." required></textarea>
+
+        @* Kommunenavn *@
+        <label style="color: white;">Kommunenavn</label>
+        <input type="text" asp-for="ReportKommunenavn" id="municipalityInput" class="form-control" readonly />
+
+        @* Fylke *@
+        <label style="color: white;">Fylke</label>
+        <input type="text" id="countryInput" asp-for="ReportFylkenavn" class="form-control" readonly />
+
+        <!-- Update button text -->
+        <button type="submit" class="btn btn-success" style="align-self: flex-start;">Se over innmelding</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@turf/turf@6.5.0/turf.min.js"></script>
+
+    <script>
+        var map = L.map('map').setView([58.1467, 7.9956], 13);
+
+        // 🌍 Define all base tile layers
+        var baseLayers = {
+            "OpenTopoMap": L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                attribution: 'Map data © OpenTopoMap & OSM'
+            }),
+            "Carto Light": L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap & CartoDB'
+            }),
+            "Carto Dark": L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap & CartoDB'
+            }),
+            "Esri Imagery": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles © Esri, Earthstar Geographics'
+            })
+        };
+
+        // Add default tile layer
+        baseLayers["OpenTopoMap"].addTo(map);
+        let currentBase = baseLayers["OpenTopoMap"];
+
+        // 🎛️ Add theme-switcher dropdown as a Leaflet control
+        L.Control.ThemeSwitcher = L.Control.extend({
+            onAdd: function () {
+                var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+                var select = L.DomUtil.create('select', '', div);
+                select.style.padding = "5px";
+
+                for (let name in baseLayers) {
+                    let option = document.createElement("option");
+                    option.value = name;
+                    option.text = name;
+                    select.appendChild(option);
+                }
+
+                select.onchange = function () {
+                    map.removeLayer(currentBase);
+                    currentBase = baseLayers[this.value];
+                    map.addLayer(currentBase);
+                };
+
+                L.DomEvent.disableClickPropagation(div);
+                return div;
+            },
+            onRemove: function () { }
+        });
+
+        L.control.themeSwitcher = function (opts) {
+            return new L.Control.ThemeSwitcher(opts);
+        };
+        L.control.themeSwitcher({ position: 'topright' }).addTo(map);
+
+        // 🛠️ Drawing controls
+        var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        var drawControl = new L.Control.Draw({
+            draw: {
+                polygon: true,
+                polyline: true,
+                marker: true,
+                circle: false,
+                rectangle: true
+            },
+            edit: {
+                featureGroup: drawnItems,
+                remove: true
+            }
+        });
+        map.addControl(drawControl);
+
+        // 📍 Centroid helper
+        function calculateCentroid(latlngs) {
+            let totalLat = 0, totalLng = 0;
+            latlngs.forEach(p => {
+                totalLat += p.lat;
+                totalLng += p.lng;
+            });
+            return {
+                lat: totalLat / latlngs.length,
+                lng: totalLng / latlngs.length
+            };
+        }
+
+        // 📦 On shape created
+        map.on(L.Draw.Event.CREATED, function (e) {
+            var type = e.layerType, layer = e.layer;
+
+            drawnItems.addLayer(layer);
+
+            var geoJsonData = layer.toGeoJSON();
+            var geoJsonString = JSON.stringify(geoJsonData);
+            document.getElementById('geoJsonInput').value = geoJsonString;
+
+            var centroid = turf.centroid(geoJsonData);
+            var geoLon = centroid.geometry.coordinates[0];
+            var geoLat = centroid.geometry.coordinates[1];
+
+            document.getElementById('latitude').value = geoLat;
+            document.getElementById('longitude').value = geoLon;
+
+            fetch('https://api.kartverket.no/kommuneinfo/v1/punkt?nord=' + geoLat + '&ost=' + geoLon + '&koordsys=4258')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('municipalityInput').value = data.kommunenavn;
+                    document.getElementById('countryInput').value = data.fylkesnavn;
+                })
+                .catch(() => console.log('Error fetching kommune info'));
+        });
+
+        // 🧹 Clear on delete/edit
+        map.on('draw:deleted draw:edited', function () {
+            document.getElementById('geoJsonInput').value = '';
+            document.getElementById('latitude').value = '';
+            document.getElementById('longitude').value = '';
+        });
+    </script>
+}

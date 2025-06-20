@@ -1,0 +1,80 @@
+﻿@using kartverket2025.Models.ViewModels
+@model kartverket2025.Models.ViewModels.MapReportOverviewPagedViewModel
+
+<link rel="stylesheet" href="~/css/reportOverviewTable.css" />
+
+<div class="Title">
+    <h2 class="table-title">My Report History</h2>
+</div>
+
+<div class="table-container">
+    <div class="top-section">
+        <form method="get" asp-action="UserReportHistory" class="search-form">
+            <input type="text" name="searchQuery" value="@Model.SearchQuery" placeholder="Søk på beskrivelse, kommune, eller fylke" />
+            <button type="submit">Søk</button>
+            <input type="hidden" name="pageSize" value="@Model.PageSize" />
+        </form>
+    </div>
+
+    <div class="table-box">
+        @if (!Model.Reports.Any())
+        {
+            <div class="alert-info">You have not submitted any reports yet.</div>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>RapportID</th>
+                        <th>Beskrivelse</th>
+                        <th>Kommunenavn</th>
+                        <th>Fylkenavn</th>
+                        <th>Saksbehandler</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var report in Model.Reports)
+                    {
+                        <tr>
+                            <td>@report.Id</td>
+                            <td>@report.ReportDescription</td>
+                            <td>@report.ReportKommunenavn</td>
+                            <td>@report.ReportFylkenavn</td>
+                            <td>@report.CaseHandler</td>
+                            <td>@report.Status</td>
+                            <td>@(report.ReportDate?.ToString("yyyy-MM-dd HH:mm") ?? "")</td>
+                            <td>
+                                <form asp-action="DeleteMapReport" asp-controller="MapReport" asp-route-id="@report.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this report?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Delete this report" aria-label="Delete report">
+                                        <span class="icon-trash"></span> Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @if (Model.TotalPages > 1)
+            {
+                <nav class="pagination-nav">
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        if (i == Model.CurrentPage)
+                        {
+                            <span class="pagination-current">@i</span>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("UserReportHistory", new { pageNumber = i, pageSize = Model.PageSize, searchQuery = Model.SearchQuery })" class="pagination-link">@i</a>
+                        }
+                    }
+                </nav>
+            }
+        }
+    </div>
+</div>

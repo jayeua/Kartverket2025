@@ -1,0 +1,56 @@
+﻿@model kartverket2025.Models.ViewModels.MapReportViewModel
+
+@{
+    ViewData["Title"] = "Forhåndsvis rapport";
+}
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<div style="display: flex;">
+    <!-- Map preview -->
+    <div style="flex: 1;">
+        <div id="previewMap" style="height:400px; width:100%; margin-bottom:10px;"></div>
+    </div>
+    <!-- Info preview -->
+    <div style="flex: 1; margin-left: 20px;">
+        <h3>Forhåndsvis rapport</h3>
+        <b>Beskrivelse:</b> @Model.ReportDescription <br />
+        <b>Kommune:</b> @Model.ReportKommunenavn <br />
+        <b>Fylke:</b> @Model.ReportFylkenavn <br />
+        <b>Område (GeoJSON):</b>
+        <pre>@Model.ReportAreaJson</pre>
+        <form asp-action="AddReport" method="get" style="display:inline;">
+            <button type="submit" class="btn btn-secondary">Gå tilbake</button>
+        </form>
+        <form asp-action="ConfirmReport" method="post" style="display:inline;">
+            @* Hidden fields to preserve data *@
+            <input type="hidden" asp-for="ReportDescription" />
+            <input type="hidden" asp-for="ReportKommunenavn" />
+            <input type="hidden" asp-for="ReportFylkenavn" />
+            <input type="hidden" asp-for="ReportAreaJson" />
+            <button type="submit" class="btn btn-success">Bekreft</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('previewMap').setView([58.1467, 7.9956], 13);
+        L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data © OpenTopoMap & OSM'
+        }).addTo(map);
+
+        // Add the user's drawn area if it exists
+        var geoJsonString = '@(Model.ReportAreaJson?.Replace("'", "\\'"))';
+        if (geoJsonString && geoJsonString !== "null" && geoJsonString !== "") {
+            try {
+                var geoJsonObj = JSON.parse(geoJsonString);
+                var layer = L.geoJSON(geoJsonObj).addTo(map);
+                map.fitBounds(layer.getBounds());
+            } catch (e) {
+                // Optionally show error
+            }
+        }
+    </script>
+}

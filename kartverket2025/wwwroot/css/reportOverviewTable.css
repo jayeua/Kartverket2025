@@ -1,0 +1,294 @@
+﻿/* 
+    Main table container, controls overall layout and spacing.
+    Ensures there is space at the bottom for pagination.
+*/
+.table-container {
+    position: relative; /* Allows for stacking of inner elements */
+    min-height: 700px; /* Minimum height for visual balance */
+    padding-bottom: 70px; /* Makes room for pagination at the bottom */
+}
+
+/* 
+    The main table styling: width, centering, background, and rounded corners.
+    Adds a subtle box-shadow for elevation.
+*/
+.table {
+    width: 95%; /* Table takes up most of the container width */
+    margin: 2rem auto; /* Adds vertical margin and centers table horizontally */
+    background: rgba(255,255,255,0.95); /* Slightly transparent white background */
+    border-radius: 18px; /* Rounded corners */
+    box-shadow: 0 8px 24px rgba(180, 139, 224, 0.10); /* Subtle shadow */
+    overflow: hidden; /* Ensures content stays within rounded corners */
+    border-collapse: separate; /* Ensures border radius works on table */
+    border-spacing: 0; /* Removes spacing between cells */
+    font-family: 'Segoe UI', 'Arial', sans-serif; /* Font stack for table text */
+}
+
+    /* 
+    Table header cells: gradient background, white text, padding, and font style.
+*/
+    .table th {
+        background: linear-gradient(90deg, #b48be0 0%, #e6a3d5 100%); /* Purple gradient */
+        color: #fff; /* White text */
+        font-size: 1.1rem; /* Slightly larger font for headers */
+        font-weight: 600; /* Bold headers */
+        padding: 1rem 0.75rem; /* Space around header text */
+        border: none; /* Removes default borders */
+        text-align: left; /* Left-aligns header text */
+    }
+
+    /* 
+    Table row transition for smooth hover effect.
+*/
+    .table tr {
+        transition: background 0.18s; /* Smooth background transition */
+    }
+
+    /* 
+    Alternative row background colors for readability.
+    Even rows: light purple, Odd rows: white.
+*/
+    .table tbody tr:nth-child(even) {
+        background: #f5e8fc;
+    }
+
+    .table tbody tr:nth-child(odd) {
+        background: #fff;
+    }
+
+    /* 
+    Hover effect for table rows: light purple background and shadow.
+*/
+    .table tbody tr:hover {
+        background: #ede0fa; /* Lighter purple on hover */
+        box-shadow: 0 2px 10px rgba(180,139,224,0.14); /* Subtle hover shadow */
+        transform: scale(1.01); /* Slightly enlarges row */
+    }
+
+    /* 
+    Table cell styling: padding, font, color, borders, and text wrapping.
+    Prevents breaking words in most columns.
+*/
+    .table td {
+        padding: 0.80rem 0.75rem; /* Cell padding */
+        font-size: 1rem; /* Standard font size */
+        color: #2d225a; /* Dark purple text */
+        border-top: 1px solid #e6a3d5; /* Border between rows */
+        vertical-align: middle; /* Vertically center cell content */
+        white-space: normal; /* Allows normal line breaks */
+        word-break: normal; /* Only break at normal break points */
+        overflow-wrap: break-word; /* Break long words if needed */
+    }
+
+        /*
+    Only apply aggressive word breaking and scrolling to Beskrivelse (Description) column.
+    Prevents other columns like email from breaking oddly.
+*/
+        .table td:nth-child(3) { /* Beskrivelse column */
+            max-width: 220px; /* Restricts width of description */
+            white-space: pre-line; /* Preserves line breaks and wraps */
+            word-break: break-word; /* Breaks long words if needed */
+            overflow: auto; /* Scroll if content overflows */
+            /* For single-line with ellipsis, use:
+       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    */
+        }
+
+        /* 
+    Ensures forms inside table cells have no extra margin.
+*/
+.table td form 
+{
+    margin: 0;
+}
+
+/* 
+    "Delete" button styling: gradient, round, shadow, and hover effect.
+*/
+.btn-danger {
+    background: linear-gradient(90deg, #b48be0 0%, #e6a3d5 100%); /* Purple gradient */
+    color: #fff !important; /* White text */
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    padding: 0.5em 1.1em; /* Padding */
+    font-weight: 500; /* Semi-bold */
+    transition: filter 0.18s, box-shadow 0.18s; /* Smooth hover effects */
+    box-shadow: 0 4px 12px rgba(180,139,224,0.13); /* Subtle shadow */
+}
+
+    /* 
+    Hover effect for "Delete" button: brighter and more shadow.
+*/
+    .btn-danger:hover {
+        filter: brightness(1.09);
+        box-shadow: 0 8px 16px rgba(180,139,224,0.18);
+    }
+
+/* 
+    Table title styling: margin, font-size, color, and weight.
+*/
+h2 {
+    margin-top: 2rem; /* Space above heading */
+    font-size: 2.2rem; /* Large heading */
+    color: #2d225a; /* Dark purple */
+    font-weight: 700; /* Bold */
+    letter-spacing: 0.01em; /* Slight spacing */
+}
+
+/* 
+    Info alert styling: background, color, border, padding, and centering.
+*/
+.alert-info {
+    background: #ede0fa; /* Light purple background */
+    color: #8856b7; /* Purple text */
+    border-radius: 12px; /* Rounded corners */
+    border: none;
+    padding: 1rem; /* Padding */
+    font-size: 1.1rem; /* Slightly larger text */
+    width: 80%; /* Not full-width */
+    margin: 2rem auto; /* Centered */
+    text-align: center; /* Centered text */
+}
+
+/* 
+    Action button base styling: round, shadow, spacing, and hover effects.
+    Used for Edit, Delete, Finish.
+*/
+.action-btn {
+    border: none;
+    border-radius: 12px; /* Rounded corners */
+    color: #fff; /* White text */
+    padding: 0.4em 1.3em; /* Padding */
+    font-size: 1em;
+    font-weight: 500; /* Semi-bold */
+    margin-right: 0.4em; /* Space between buttons */
+    box-shadow: 0 2px 6px rgba(160, 120, 210, 0.09); /* Subtle shadow */
+    transition: background 0.18s, box-shadow 0.18s; /* Smooth hover */
+    cursor: pointer;
+    display: inline-block;
+    min-width: 70px; /* Minimum button width for consistency */
+}
+
+    /* 
+    Action button variant: Edit. Purple background and darker on hover.
+*/
+    .action-btn.edit {
+        background: #a98ee6;
+    }
+
+        .action-btn.edit:hover {
+            background: #8860d0;
+        }
+
+    /* 
+    Action button variant: Delete. Pink background and red on hover.
+*/
+    .action-btn.delete {
+        background: #e573a3;
+    }
+
+        .action-btn.delete:hover {
+            background: #e63946;
+        }
+
+    /* 
+    Action button variant: Finish. Green background and darker on hover.
+*/
+    .action-btn.finish {
+        background: #6fbf73;
+    }
+
+        .action-btn.finish:hover {
+            background: #44a163;
+        }
+
+/* 
+    Groups action buttons in a flex row with spacing.
+*/
+.action-btn-group {
+    display: flex; /* Arrange buttons in a row */
+    flex-direction: row;
+    gap: 0.7em; /* Space between buttons */
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* 
+    Pagination navigation styling: spacing, centering, and stacking order.
+*/
+.pagination-nav {
+    margin-top: 24px; /* Space above pagination */
+    margin-bottom: 12px; /* Space below pagination */
+    text-align: center; /* Center pagination */
+    position: relative; /* Default stacking */
+    z-index: 1; /* Ensure on top */
+}
+
+/* 
+    Pagination link styling: background, padding, spacing, and colors.
+*/
+.pagination-link {
+    margin: 0 5px; /* Space between page numbers */
+    padding: 4px 8px; /* Padding inside page numbers */
+    background: #e0e0ff; /* Light purple background */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* No underline */
+    color: #333; /* Dark text */
+}
+
+/* 
+    Styling for current/active pagination item: bold, background, and white text.
+*/
+.pagination-current {
+    font-weight: bold;
+    margin: 0 5px;
+    padding: 4px 8px;
+    background: #a080ff; /* Purple background */
+    color: #fff; /* White text */
+    border-radius: 5px;
+}
+
+
+/* 
+    Search form container: 
+    - Uses flex layout to align input and button horizontally with spacing.
+    - Centers items vertically.
+    - Adds space below the form for visual separation from the table.
+*/
+.search-form {
+    display: flex; /* Align form items in a row */
+    gap: 8px; /* Space between input and button */
+    align-items: center; /* Vertically center items */
+    margin-bottom: 24px; /* Space below form */
+}
+
+    /* 
+    Search input styling:
+    - Expands to fill available space in the flex container.
+    - Provides padding and rounded corners for better UX.
+    - Subtle border for definition.
+*/
+    .search-form input[type="text"] {
+        flex: 1; /* Input grows to fill remaining form space */
+        padding: 6px; /* Internal spacing for text */
+        border-radius: 5px; /* Rounded corners */
+        border: 1px solid #ccc; /* Light gray border */
+    }
+
+    /* 
+    Search button styling:
+    - Padding for clickability.
+    - Rounded corners for modern look.
+    - Distinctive purple background for visibility.
+    - White text for contrast.
+    - No border for a cleaner appearance.
+    - Bold text for emphasis.
+*/
+    .search-form button[type="submit"] {
+        padding: 6px 16px; /* Space inside button (vertical, horizontal) */
+        border-radius: 5px; /* Rounded corners */
+        background: #a080ff; /* Brand purple background */
+        color: white; /* White text for contrast */
+        border: none; /* Remove default border */
+        font-weight: 500; /* Slightly bold text */
+    }

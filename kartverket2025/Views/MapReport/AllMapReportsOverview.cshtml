@@ -1,0 +1,92 @@
+﻿@using kartverket2025.Models.ViewModels
+@model kartverket2025.Models.ViewModels.MapReportOverviewPagedViewModel
+
+<link rel="stylesheet" href="~/css/reportOverviewTable.css" />
+
+<div class="Title">
+<h2 class="table-title">Oversikt alle innmeldinger</h2>
+</div>
+
+<div class="table-container">
+    <div class="top-section">
+        <form method="get" asp-action="AllMapReportsOverview" class="search-form" style="display: flex; gap: 8px; align-items: center; margin-bottom: 24px;">
+            <input type="text" name="searchQuery" value="@Model.SearchQuery" placeholder="Søk på e-post, beskrivelse, kommune, fylke..." style="flex: 1; padding: 6px; border-radius: 5px; border: 1px solid #ccc;" />
+            <button type="submit" style="padding: 6px 16px; border-radius: 5px; background: #a080ff; color: white; border: none;">Søk</button>
+            <input type="hidden" name="pageSize" value="@Model.PageSize" />
+        </form>
+    </div>
+
+    <div class="table-box">
+        <table class="table">
+            <thead>
+                <tr class="table-header">
+                    <th>InnmeldingerID</th>
+                    <th>Email</th>
+                    <th>Beskrivelse</th>
+                    <th>Kommune</th>
+                    <th>Fylke</th>
+                    <th>Status</th>
+                    <th>Sist Oppdatert</th>
+                    <th>Handlinger</th>
+                </tr>
+            </thead>
+            <tbody class="table-body">
+                @if (!Model.Reports.Any())
+                {
+                    <tr>
+                        <td colspan="8" style="text-align: center;">No reports found</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var report in Model.Reports)
+                    {
+                        <tr>
+                            <td>@report.Id</td>
+                            <td>@report.Email</td>
+                            <td>@report.ReportDescription</td>
+                            <td>@report.ReportKommunenavn</td>
+                            <td>@report.ReportFylkenavn</td>
+                            <td>@report.Status</td>
+                            <td>@(report.ReportDate?.ToString("yyyy-MM-dd HH:mm") ?? "")</td>
+                            <td>
+                                <div class="action-btn-group">
+                                    @if (!string.Equals(report.Status, "Finished", StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        <a href="@Url.Action("UpdateMapReport", "MapReport", new { id = report.Id })" class="action-btn edit">Edit</a>
+                                        <form asp-action="FinishReport" asp-controller="MapReport" method="post" style="display:inline;">
+                                            <input type="hidden" name="id" value="@report.Id" />
+                                            <button type="submit" class="action-btn finish">Finish</button>
+                                        </form>
+                                    }
+                                    <a asp-action="DeleteMapReport" asp-controller="MapReport" asp-route-id="@report.Id" class="action-btn delete">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+        @if (Model.TotalPages > 1)
+        {
+            <nav class="pagination-nav" style="margin-top: 20px; text-align: center;">
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    if (i == Model.CurrentPage)
+                    {
+                        <span class="pagination-current" style="font-weight: bold; margin: 0 5px; padding: 4px 8px; background: #a080ff; color: #fff; border-radius: 5px;">@i</span>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("AllMapReportsOverview", new { pageNumber = i, pageSize = Model.PageSize, searchQuery = Model.SearchQuery })"
+                           class="pagination-link"
+                           style="margin: 0 5px; padding: 4px 8px; background: #e0e0ff; border-radius: 5px; text-decoration: none; color: #333;">
+                            @i
+                        </a>
+                    }
+                }
+            </nav>
+        }
+    </div>
+</div>

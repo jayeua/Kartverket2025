@@ -29,7 +29,7 @@ namespace kartverket2025.Controllers
             {
                 allUsers = allUsers.Where(u =>
                     (u.Email != null && u.Email.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
-                    (u.UserName != null && u.UserName.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
+                    (u.FullName != null && u.FullName.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
                     (u.Id != null && u.Id.Contains(searchQuery, StringComparison.OrdinalIgnoreCase))
                 ).ToList();
             }
@@ -63,7 +63,7 @@ namespace kartverket2025.Controllers
                 {
                     Id = user.Id,
                     Email = user.Email,
-                    UserName = user.UserName,
+                    FullName = $"{user.FirstName} {user.LastName}",
                     Roles = userRoles
                 });
             }

@@ -35,6 +35,10 @@
         <label for="longitude" style="color: white;">Lengdegrad</label>
         <input type="text" id="longitude" name="Longitude" class="form-control" readonly />
 
+        @* Title *@
+        <label for="title" style="color: white;">Tittel</label>
+        <textarea id="title" asp-for="ReportTitle" class="form-control" placeholder="Skriv her..." required></textarea>
+
         @* Description *@
         <label for="description" style="color: white;">Beskrivelse</label>
         <textarea id="description" asp-for="ReportDescription" class="form-control" placeholder="Skriv her..." required></textarea>
@@ -62,23 +66,29 @@
 
         // 🌍 Define all base tile layers
         var baseLayers = {
-            "OpenTopoMap": L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-                attribution: 'Map data © OpenTopoMap & OSM'
+           "Topofarge": L.tileLayer(
+            'https://cache.kartverket.no/v1/wmts/1.0.0/topo/default/webmercator/{z}/{y}/{x}.png',{
+                attribution: '&copy; Kartverket' 
             }),
+            "Topogråtone": L.tileLayer('https://cache.kartverket.no/v1/wmts/1.0.0/topograatone/default/webmercator/{z}/{y}/{x}.png', {
+                attribution: '&copy; <a href="http://www.kartverket.no/">Kartverket</a>'
+            }),
+            "Turkart": L.tileLayer('https://cache.kartverket.no/v1/wmts/1.0.0/toporaster/default/webmercator/{z}/{y}/{x}.png',{
+                attribution: '&copy; Kartverket' }),
+            "Sjøkart": L.tileLayer('https://cache.kartverket.no/v1/wmts/1.0.0/sjokartraster/default/webmercator/{z}/{y}/{x}.png', {
+                attribution: '&copy; Kartverket' 
+             }),
             "Carto Light": L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; OpenStreetMap & CartoDB'
             }),
             "Carto Dark": L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; OpenStreetMap & CartoDB'
-            }),
-            "Esri Imagery": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Tiles © Esri, Earthstar Geographics'
             })
-        };
+        };  
 
         // Add default tile layer
-        baseLayers["OpenTopoMap"].addTo(map);
-        let currentBase = baseLayers["OpenTopoMap"];
+        baseLayers["Topofarge"].addTo(map);
+        let currentBase = baseLayers["Topofarge"];
 
         // 🎛️ Add theme-switcher dropdown as a Leaflet control
         L.Control.ThemeSwitcher = L.Control.extend({

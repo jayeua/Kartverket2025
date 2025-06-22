@@ -39,6 +39,7 @@ namespace kartverket2025.Controllers
                     Email = currentUser.Email,
                     Kommunenavn = mapReportViewModel.ReportKommunenavn,
                     Fylkenavn = mapReportViewModel.ReportFylkenavn,
+                    Title = mapReportViewModel.ReportTitle,
                     Description = mapReportViewModel.ReportDescription,
                     AreaJson = mapReportViewModel.ReportAreaJson,
                     MapReportStatusId = 1,
@@ -77,6 +78,7 @@ namespace kartverket2025.Controllers
                     Email = currentUser.Email,
                     Kommunenavn = mapReportViewModel.ReportKommunenavn,
                     Fylkenavn = mapReportViewModel.ReportFylkenavn,
+                    Title = mapReportViewModel.ReportTitle,
                     Description = mapReportViewModel.ReportDescription,
                     AreaJson = mapReportViewModel.ReportAreaJson,
                     MapReportStatusId = 1,
@@ -132,6 +134,7 @@ namespace kartverket2025.Controllers
             if (!string.IsNullOrEmpty(searchQuery))
             {
                 userReports = userReports.Where(r =>
+                    (r.Title != null && r.Title.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
                     (r.Description != null && r.Description.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
                     (r.Kommunenavn != null && r.Kommunenavn.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
                     (r.Fylkenavn != null && r.Fylkenavn.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
@@ -153,6 +156,7 @@ namespace kartverket2025.Controllers
                 .Select(r => new MapReportViewModel
                 {
                     Id = r.Id,
+                    ReportTitle = r.Title ?? "No Title",
                     ReportDescription = r.Description,
                     ReportKommunenavn = r.Kommunenavn,
                     ReportFylkenavn = r.Fylkenavn,
@@ -209,7 +213,7 @@ namespace kartverket2025.Controllers
                 allReports = allReports
                     .Where(r =>
                         (r.Email != null && r.Email.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
-                        (r.Description != null && r.Description.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
+                        (r.Title != null && r.Description.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
                         (r.Kommunenavn != null && r.Kommunenavn.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
                         (r.Fylkenavn != null && r.Fylkenavn.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)))
                     .ToList();
@@ -227,9 +231,9 @@ namespace kartverket2025.Controllers
                 .Take(pageSize)
                 .Select(u => new MapReportViewModel
                 {
+                    ReportTitle = u.Title,
                     ReportKommunenavn = u.Kommunenavn,
                     ReportFylkenavn = u.Fylkenavn,
-                    ReportDescription = u.Description,
                     ReportAreaJson = u.AreaJson,
                     ReportDate = u.Date,
                     Email = u.Email,

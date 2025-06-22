@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="~/css/reportOverviewTable.css" />
 
 <div class="Title">
-    <h2 class="table-title">My Report History</h2>
+    <h2 class="table-title">Your map reports history</h2>
 </div>
 
 <div class="table-container">
@@ -27,6 +27,7 @@
                 <thead>
                     <tr>
                         <th>RapportID</th>
+                        <th>Tittel</th>
                         <th>Beskrivelse</th>
                         <th>Kommunenavn</th>
                         <th>Fylkenavn</th>
@@ -41,6 +42,7 @@
                     {
                         <tr>
                             <td>@report.Id</td>
+                            <td>@report.ReportTitle</td>
                             <td>@report.ReportDescription</td>
                             <td>@report.ReportKommunenavn</td>
                             <td>@report.ReportFylkenavn</td>

@@ -38,7 +38,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="MapReport" asp-action="UserReportHistory">Reports</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="MapReport" asp-action="AddReport">MapReport</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="MapReport" asp-action="AddReport">Add map report</a>
                             </li>
                         }
                         @if (signInManager.IsSignedIn(User) && (User.IsInRole("Case Handler")))
@@ -68,7 +68,7 @@
 
     <footer class="border-top footer text-muted bg-white" style="z-index: 10000">
         <div class="container">
-            &copy; 2025 - kartverket2025 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - Kartverket2025 - <a asp-area="" asp-controller="Account" asp-action="Register">Register</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -76,6 +76,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js?ver=1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     @await RenderSectionAsync("Scripts", required: false)
 </body>

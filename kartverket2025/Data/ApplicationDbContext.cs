@@ -16,6 +16,11 @@ namespace kartverket2025.Data
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<MapReportModel> MapReport { get; set; }
         public DbSet<MapReportStatus> MapReportStatus { get; set; }
+        public DbSet<MapPriorityStatus> MapPriorityStatus { get; set; }
+
+        
+
+        //seed roles
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -81,8 +86,9 @@ namespace kartverket2025.Data
 
         modelBuilder.Entity<MapReportModel>()
                 .HasKey(m => m.Id);
-
         modelBuilder.Entity<MapReportStatus>()
+                .HasKey(m => m.Id);
+        modelBuilder.Entity<MapPriorityStatus>()
                 .HasKey(m => m.Id);
 
           modelBuilder.Entity<MapReportModel>()
@@ -97,6 +103,11 @@ namespace kartverket2025.Data
                 new MapReportStatus { Id = 3, Status = "Finished" },
                 new MapReportStatus { Id = 4, Status = "Revoked" }
                 );
+        modelBuilder.Entity<MapPriorityStatus>().HasData(
+                new MapPriorityStatus { Id = 1, PriorityStatus = "Low" },
+                new MapPriorityStatus { Id = 2, PriorityStatus = "Medium" },
+                new MapPriorityStatus { Id = 3, PriorityStatus = "High" }
+            );
 
         }
 

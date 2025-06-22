@@ -1,7 +1,7 @@
 ﻿@model kartverket2025.Models.ViewModels.MapReportViewModel
 
 @{
-    ViewData["Title"] = "Forhåndsvis rapport";
+    ViewData["Title"] = "Preview Report";
 }
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -13,17 +13,19 @@
     </div>
     <!-- Info preview -->
     <div style="flex: 1; margin-left: 20px;">
-        <h3>Forhåndsvis rapport</h3>
+        <h3>Preview Report</h3>
+        <b>Tittel:</b> @Model.ReportTitle <br />
         <b>Beskrivelse:</b> @Model.ReportDescription <br />
         <b>Kommune:</b> @Model.ReportKommunenavn <br />
         <b>Fylke:</b> @Model.ReportFylkenavn <br />
-        <b>Område (GeoJSON):</b>
-        <pre>@Model.ReportAreaJson</pre>
+        @* <b>Område (GeoJSON):</b> *@
+        @* <pre>@Model.ReportAreaJson</pre> *@
         <form asp-action="AddReport" method="get" style="display:inline;">
             <button type="submit" class="btn btn-secondary">Gå tilbake</button>
         </form>
         <form asp-action="ConfirmReport" method="post" style="display:inline;">
             @* Hidden fields to preserve data *@
+            <input type="hidden" asp-for="ReportTitle" />
             <input type="hidden" asp-for="ReportDescription" />
             <input type="hidden" asp-for="ReportKommunenavn" />
             <input type="hidden" asp-for="ReportFylkenavn" />
@@ -37,19 +39,42 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         var map = L.map('previewMap').setView([58.1467, 7.9956], 13);
-        L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data © OpenTopoMap & OSM'
+        L.tileLayer('https://cache.kartverket.no/v1/wmts/1.0.0/topo/default/webmercator/{z}/{y}/{x}.png',{
+        attribution: '&copy; Kartverket'
         }).addTo(map);
 
-        // Add the user's drawn area if it exists
-        var geoJsonString = '@(Model.ReportAreaJson?.Replace("'", "\\'"))';
+        // Use Html.Raw & Json.Serialize to avoid all escaping problems!
+        var geoJsonString = @Html.Raw(Json.Serialize(Model.ReportAreaJson ?? "null"));
+        console.log("GeoJSON in preview:", geoJsonString);
+
         if (geoJsonString && geoJsonString !== "null" && geoJsonString !== "") {
             try {
-                var geoJsonObj = JSON.parse(geoJsonString);
+                // If geoJsonString is a string, parse it to a JS object
+                var geoJsonObj = typeof geoJsonString === 'string' ? JSON.parse(geoJsonString) : geoJsonString;
+
+                // If it's a single Feature, wrap as FeatureCollection for Leaflet
+                if (geoJsonObj.type === "Feature") {
+                    geoJsonObj = {
+                        type: "FeatureCollection",
+                        features: [geoJsonObj]
+                    };
+                }
+
                 var layer = L.geoJSON(geoJsonObj).addTo(map);
-                map.fitBounds(layer.getBounds());
+
+                // Fit/center map to marker or shape
+                if (layer.getBounds && layer.getBounds().isValid()) {
+                    map.fitBounds(layer.getBounds(), {maxZoom: 30}); //added max zoom to fitbounds in order that causes the map to prevent super zoom and slow rendering and fixed it
+                } else if (
+                    geoJsonObj.features &&
+                    geoJsonObj.features.length > 0 &&
+                    geoJsonObj.features[0].geometry.type === "Point"
+                ) {
+                    var coords = geoJsonObj.features[0].geometry.coordinates;
+                    map.setView([coords[1], coords[0]], 30); //zoom value
+                }
             } catch (e) {
-                // Optionally show error
+                console.error("GeoJSON parse error:", e, geoJsonString);
             }
         }
     </script>

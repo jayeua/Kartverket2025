@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using kartverket2025.Data;
 
@@ -11,9 +12,11 @@ using kartverket2025.Data;
 namespace kartverket2025.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250621210835_AddAndSeedPriorityStatusModel")]
+    partial class AddAndSeedPriorityStatusModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,7 +262,7 @@ namespace kartverket2025.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("PriorityStatus")
+                    b.Property<string>("priorityStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -271,17 +274,17 @@ namespace kartverket2025.Migrations
                         new
                         {
                             Id = 1,
-                            PriorityStatus = "Low"
+                            priorityStatus = "Low"
                         },
                         new
                         {
                             Id = 2,
-                            PriorityStatus = "Medium"
+                            priorityStatus = "Medium"
                         },
                         new
                         {
                             Id = 3,
-                            PriorityStatus = "High"
+                            priorityStatus = "High"
                         });
                 });
 
@@ -319,9 +322,6 @@ namespace kartverket2025.Migrations
 
                     b.Property<int>("MapReportStatusId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");

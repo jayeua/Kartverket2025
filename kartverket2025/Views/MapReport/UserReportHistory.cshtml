@@ -10,7 +10,7 @@
 <div class="table-container">
     <div class="top-section">
         <form method="get" asp-action="UserReportHistory" class="search-form">
-            <input type="text" name="searchQuery" value="@Model.SearchQuery" placeholder="Søk på beskrivelse, kommune, eller fylke" />
+            <input type="text" name="searchQuery" value="@Model.SearchQuery" placeholder="Søk på tittel, beskrivelse, kommune, eller fylke" />
             <button type="submit">Søk</button>
             <input type="hidden" name="pageSize" value="@Model.PageSize" />
         </form>

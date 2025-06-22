@@ -26,19 +26,19 @@
             <textarea id="title" asp-for="ReportTitle" class="report-textarea" placeholder="Skriv tittel..." required></textarea>
 
             <label for="description" class="report-label">Beskrivelse</label>
-            <textarea id="description" asp-for="ReportDescription" class="report-textarea" placeholder="Skriv beskrivelse..." required></textarea>
+            <textarea id="description" asp-for="ReportDescription" class="report-textarea" placeholder="Beskrivelse" required></textarea>
 
-            <label for="latitude" class="report-label">Breddegrad</label>
-            <input type="text" id="latitude" name="Latitude" class="report-input" readonly />
-
-            <label for="longitude" class="report-label">Lengdegrad</label>
-            <input type="text" id="longitude" name="Longitude" class="report-input" readonly />
-
-            <label class="report-label">Kommunenavn</label>
+            <label class="report-label">Kommune</label>
             <input type="text" asp-for="ReportKommunenavn" id="municipalityInput" class="report-input" readonly />
 
             <label for="countryInput" class="report-label">Fylke</label>
             <input type="text" id="countryInput" asp-for="ReportFylkenavn" class="report-input" readonly />
+
+            <label for="latitude" class="report-label"></label>
+            <input type="hidden" id="latitude" name="Latitude" class="report-input" readonly />
+
+            <label for="longitude" class="report-label"></label>
+            <input type="hidden" id="longitude" name="Longitude" class="report-input" readonly />
 
             <button type="submit" class="report-btn">Se over innmelding</button>
         </form>

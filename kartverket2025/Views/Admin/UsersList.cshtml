@@ -32,7 +32,7 @@
                         <tr>
                             <td>@user.Id</td>
                             <td>@user.Email</td>
-                            <td>@user.UserName</td>
+                            <td>@user.FullName</td>
                             <td>@string.Join(", ", user.Roles ?? new List<string>())</td>
                             <td>
                                 @if (!(user.Roles?.Contains("System Admin") ?? false))

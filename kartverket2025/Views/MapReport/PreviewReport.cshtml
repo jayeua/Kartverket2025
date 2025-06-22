@@ -5,35 +5,38 @@
 }
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" href="~/css/report.css" />
 
-<div style="display: flex;">
+<div class="report-container">
     <!-- Map preview -->
-    <div style="flex: 1;">
-        <div id="previewMap" style="height:400px; width:100%; margin-bottom:10px;"></div>
+    <div class="report-map">
+        <div id="previewMap" style="height:400px; width:100%;"></div>
     </div>
     <!-- Info preview -->
-    <div style="flex: 1; margin-left: 20px;">
-        <h3>Preview Report</h3>
-        <b>Tittel:</b> @Model.ReportTitle <br />
-        <b>Beskrivelse:</b> @Model.ReportDescription <br />
-        <b>Kommune:</b> @Model.ReportKommunenavn <br />
-        <b>Fylke:</b> @Model.ReportFylkenavn <br />
-        @* <b>Område (GeoJSON):</b> *@
-        @* <pre>@Model.ReportAreaJson</pre> *@
-        <form asp-action="AddReport" method="get" style="display:inline;">
-            <button type="submit" class="btn btn-secondary">Gå tilbake</button>
-        </form>
-        <form asp-action="ConfirmReport" method="post" style="display:inline;">
-            @* Hidden fields to preserve data *@
-            <input type="hidden" asp-for="ReportTitle" />
-            <input type="hidden" asp-for="ReportDescription" />
-            <input type="hidden" asp-for="ReportKommunenavn" />
-            <input type="hidden" asp-for="ReportFylkenavn" />
-            <input type="hidden" asp-for="ReportAreaJson" />
-            <button type="submit" class="btn btn-success">Bekreft</button>
-        </form>
+    <div class="report-info">
+        <span class="report-title">Preview Report</span>
+        <div class="report-info-table">
+            <b>Tittel:</b> @Model.ReportTitle <br />
+            <b>Beskrivelse:</b> @Model.ReportDescription <br />
+            <b>Kommune:</b> @Model.ReportKommunenavn <br />
+            <b>Fylke:</b> @Model.ReportFylkenavn <br />
+        </div>
+        <div>
+            <form asp-action="AddReport" method="get" style="display:inline;">
+                <button type="submit" class="report-btn secondary">Gå tilbake</button>
+            </form>
+            <form asp-action="ConfirmReport" method="post" style="display:inline;">
+                <input type="hidden" asp-for="ReportTitle" />
+                <input type="hidden" asp-for="ReportDescription" />
+                <input type="hidden" asp-for="ReportKommunenavn" />
+                <input type="hidden" asp-for="ReportFylkenavn" />
+                <input type="hidden" asp-for="ReportAreaJson" />
+                <button type="submit" class="report-btn">Bekreft</button>
+            </form>
+        </div>
     </div>
 </div>
+
 
 @section Scripts {
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>

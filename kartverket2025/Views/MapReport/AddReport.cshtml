@@ -7,54 +7,44 @@
 <head>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
-    <style>
-        #map {
-            height: 500px;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/report.css" />
 </head>
 
-<div>
-    <h2>Add Report</h2>
+<div class="report-container">
+    <!-- Map -->
+    <div class="report-map">
+        <div id="map" style="height: 400px; width: 100%;"></div>
+    </div>
 
-    <!-- Add this div for the map -->
-    <div id="map"></div>
+    <!-- Add Report Form -->
+    <div class="report-info">
+        <span class="report-title">Add Report</span>
+        <form asp-action="PreviewReport" method="post">
+            <input type="hidden" id="geoJsonInput" asp-for="ReportAreaJson" hidden />
 
-    <!-- Change asp-action to PreviewReport -->
-    <form asp-action="PreviewReport" method="post">
-        @* GeoJSON Data (hidden) *@
-        <input type="hidden" id="geoJsonInput" asp-for="ReportAreaJson" hidden />
+            <label for="title" class="report-label">Tittel</label>
+            <textarea id="title" asp-for="ReportTitle" class="report-textarea" placeholder="Skriv tittel..." required></textarea>
 
-        @* Latitude *@
-        <label for="latitude" style="color: white;">Breddegrad</label>
-        <input type="text" id="latitude" name="Latitude" class="form-control" readonly />
+            <label for="description" class="report-label">Beskrivelse</label>
+            <textarea id="description" asp-for="ReportDescription" class="report-textarea" placeholder="Skriv beskrivelse..." required></textarea>
 
-        @* Longitude *@
-        <label for="longitude" style="color: white;">Lengdegrad</label>
-        <input type="text" id="longitude" name="Longitude" class="form-control" readonly />
+            <label for="latitude" class="report-label">Breddegrad</label>
+            <input type="text" id="latitude" name="Latitude" class="report-input" readonly />
 
-        @* Title *@
-        <label for="title" style="color: white;">Tittel</label>
-        <textarea id="title" asp-for="ReportTitle" class="form-control" placeholder="Skriv her..." required></textarea>
+            <label for="longitude" class="report-label">Lengdegrad</label>
+            <input type="text" id="longitude" name="Longitude" class="report-input" readonly />
 
-        @* Description *@
-        <label for="description" style="color: white;">Beskrivelse</label>
-        <textarea id="description" asp-for="ReportDescription" class="form-control" placeholder="Skriv her..." required></textarea>
+            <label class="report-label">Kommunenavn</label>
+            <input type="text" asp-for="ReportKommunenavn" id="municipalityInput" class="report-input" readonly />
 
-        @* Kommunenavn *@
-        <label style="color: white;">Kommunenavn</label>
-        <input type="text" asp-for="ReportKommunenavn" id="municipalityInput" class="form-control" readonly />
+            <label for="countryInput" class="report-label">Fylke</label>
+            <input type="text" id="countryInput" asp-for="ReportFylkenavn" class="report-input" readonly />
 
-        @* Fylke *@
-        <label style="color: white;">Fylke</label>
-        <input type="text" id="countryInput" asp-for="ReportFylkenavn" class="form-control" readonly />
-
-        <!-- Update button text -->
-        <button type="submit" class="btn btn-success" style="align-self: flex-start;">Se over innmelding</button>
-    </form>
+            <button type="submit" class="report-btn">Se over innmelding</button>
+        </form>
+    </div>
 </div>
+
 
 @section Scripts {
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>

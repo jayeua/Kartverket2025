@@ -17,7 +17,7 @@ namespace kartverket2025.Data
         public DbSet<MapReportModel> MapReport { get; set; }
         public DbSet<MapReportStatus> MapReportStatus { get; set; }
         public DbSet<MapPriorityStatus> MapPriorityStatus { get; set; }
-
+        public DbSet<TileLayerModel> TileLayer { get; set; }
         
 
         //seed roles
@@ -107,6 +107,14 @@ namespace kartverket2025.Data
                 new MapPriorityStatus { Id = 1, PriorityStatus = "Low" },
                 new MapPriorityStatus { Id = 2, PriorityStatus = "Medium" },
                 new MapPriorityStatus { Id = 3, PriorityStatus = "High" }
+            );
+            modelBuilder.Entity<TileLayerModel>().HasData(
+                new TileLayerModel { Id = 1, KartType = "Topofarge"},
+                new TileLayerModel { Id = 2, KartType = "Topogråtone" },
+                new TileLayerModel { Id = 3, KartType = "Turkart" },
+                new TileLayerModel { Id = 4, KartType = "Sjøkart" },
+                new TileLayerModel { Id = 5, KartType = "Carto Light" },
+                new TileLayerModel { Id = 6, KartType = "Carto Dark" }
             );
 
         }

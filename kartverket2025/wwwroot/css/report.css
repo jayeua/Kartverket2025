@@ -46,6 +46,23 @@
     margin-bottom: 0.25rem;
 }
 
+.karttype-select {
+    width: 30%;       /* Makes select full width below label, or adjust as needed */
+    min-width: 120px;
+    min-width: 120px;
+    max-width: 135px; /* adjust the width of karttype label form*/
+}
+
+.karttype-label {
+    display: inline-block;
+    min-width: unset;
+    max-width: 260px;
+    width: auto;
+    margin-bottom: 0.25rem;
+    margin-left: 16px; /*adding margin to the left of karttype text*/
+}
+
+
 .report-input, .report-textarea {
     width: 100%;
     border-radius: 10px;

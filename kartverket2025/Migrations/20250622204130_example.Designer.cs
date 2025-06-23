@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using kartverket2025.Data;
 
@@ -11,9 +12,11 @@ using kartverket2025.Data;
 namespace kartverket2025.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250622204130_example")]
+    partial class example
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -323,6 +326,9 @@ namespace kartverket2025.Migrations
                     b.Property<int>("TileLayerId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TileLayerModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -334,6 +340,8 @@ namespace kartverket2025.Migrations
                     b.HasIndex("MapPriorityStatusModelId");
 
                     b.HasIndex("MapReportStatusId");
+
+                    b.HasIndex("TileLayerModelId");
 
                     b.ToTable("MapReport");
                 });
@@ -488,9 +496,15 @@ namespace kartverket2025.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("kartverket2025.Models.DomainModels.TileLayerModel", "TileLayerModel")
+                        .WithMany()
+                        .HasForeignKey("TileLayerModelId");
+
                     b.Navigation("MapPriorityStatusModel");
 
                     b.Navigation("MapReportStatusModel");
+
+                    b.Navigation("TileLayerModel");
                 });
 #pragma warning restore 612, 618
         }

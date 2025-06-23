@@ -13,5 +13,6 @@
         public string? CaseHandler { get; set; }
         public string? Status { get; set; }
         public string? Priority { get; set; }
+        public int TileLayerId { get; set; }
     }
 }

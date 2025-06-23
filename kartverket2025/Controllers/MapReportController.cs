@@ -42,6 +42,7 @@ namespace kartverket2025.Controllers
                     Title = mapReportViewModel.ReportTitle,
                     Description = mapReportViewModel.ReportDescription,
                     AreaJson = mapReportViewModel.ReportAreaJson,
+                    TileLayerId = mapReportViewModel.TileLayerId,
                     MapReportStatusId = 1,
                     Date = DateTime.Now 
                 };
@@ -81,6 +82,7 @@ namespace kartverket2025.Controllers
                     Title = mapReportViewModel.ReportTitle,
                     Description = mapReportViewModel.ReportDescription,
                     AreaJson = mapReportViewModel.ReportAreaJson,
+                    TileLayerId = mapReportViewModel.TileLayerId,
                     MapReportStatusId = 1,
                     Date = DateTime.Now
                 };
@@ -319,6 +321,7 @@ namespace kartverket2025.Controllers
             if (mapToUpdate != null && mapToUpdate.MapReportStatusId != 3)
             {
                 mapToUpdate.MapReportStatusId = 3; // Set status to Finished
+                mapToUpdate.Date = DateTime.Now;
                 mapToUpdate.CaseHandler = $"{casehandler.FirstName} {casehandler.LastName}"; // Set case handler
 
                 await _mapReportRepository.UpdateReportAsync(mapToUpdate);

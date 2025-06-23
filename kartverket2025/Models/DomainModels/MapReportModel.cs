@@ -13,6 +13,9 @@
         public string? Kommunenavn { get; set; }
         public string? Fylkenavn { get; set; }
 
+        // --- Tile Layer ---
+        public int TileLayerId { get; set; } // Foreign key
+        // --- Status & Priority ---
         public MapReportStatus? MapReportStatusModel { get; set; }
         public MapPriorityStatus? MapPriorityStatusModel { get; set; }
         public int MapReportStatusId { get; set; }

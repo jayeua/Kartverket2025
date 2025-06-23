@@ -1,8 +1,5 @@
 ﻿@model kartverket2025.Models.ViewModels.MapReportViewModel
 
-@{
-    ViewData["Title"] = "Preview Report";
-}
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <link rel="stylesheet" href="~/css/report.css" />
@@ -20,6 +17,18 @@
             <b>Beskrivelse:</b> @Model.ReportDescription <br />
             <b>Kommune:</b> @Model.ReportKommunenavn <br />
             <b>Fylke:</b> @Model.ReportFylkenavn <br />
+            <b>Karttype:</b> @(
+            Model.TileLayerId switch
+            {
+                1 => "Topofarge",
+                2 => "Topogråtone",
+                3 => "Turkart",
+                4 => "Sjøkart",
+                5 => "Carto Light",
+                6 => "Carto Dark",
+                _ => "Ukjent"
+            }
+            )<br />
         </div>
         <div>
             <form asp-action="AddReport" method="get" style="display:inline;">
@@ -31,54 +40,27 @@
                 <input type="hidden" asp-for="ReportKommunenavn" />
                 <input type="hidden" asp-for="ReportFylkenavn" />
                 <input type="hidden" asp-for="ReportAreaJson" />
+                <input type="hidden" asp-for="TileLayerId" />
                 <button type="submit" class="report-btn">Bekreft</button>
             </form>
         </div>
     </div>
 </div>
-
-
-@section Scripts {
+@section Scripts{
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@turf/turf@6.5.0/turf.min.js"></script>
+    <script src="~/js/displayMapReport.js"></script>
     <script>
-        var map = L.map('previewMap').setView([58.1467, 7.9956], 13);
-        L.tileLayer('https://cache.kartverket.no/v1/wmts/1.0.0/topo/default/webmercator/{z}/{y}/{x}.png',{
-        attribution: '&copy; Kartverket'
-        }).addTo(map);
-
-        // Use Html.Raw & Json.Serialize to avoid all escaping problems!
-        var geoJsonString = @Html.Raw(Json.Serialize(Model.ReportAreaJson ?? "null"));
-        console.log("GeoJSON in preview:", geoJsonString);
-
-        if (geoJsonString && geoJsonString !== "null" && geoJsonString !== "") {
-            try {
-                // If geoJsonString is a string, parse it to a JS object
-                var geoJsonObj = typeof geoJsonString === 'string' ? JSON.parse(geoJsonString) : geoJsonString;
-
-                // If it's a single Feature, wrap as FeatureCollection for Leaflet
-                if (geoJsonObj.type === "Feature") {
-                    geoJsonObj = {
-                        type: "FeatureCollection",
-                        features: [geoJsonObj]
-                    };
-                }
-
-                var layer = L.geoJSON(geoJsonObj).addTo(map);
-
-                // Fit/center map to marker or shape
-                if (layer.getBounds && layer.getBounds().isValid()) {
-                    map.fitBounds(layer.getBounds(), {maxZoom: 30}); //added max zoom to fitbounds in order that causes the map to prevent super zoom and slow rendering and fixed it
-                } else if (
-                    geoJsonObj.features &&
-                    geoJsonObj.features.length > 0 &&
-                    geoJsonObj.features[0].geometry.type === "Point"
-                ) {
-                    var coords = geoJsonObj.features[0].geometry.coordinates;
-                    map.setView([coords[1], coords[0]], 30); //zoom value
-                }
-            } catch (e) {
-                console.error("GeoJSON parse error:", e, geoJsonString);
-            }
-        }
+        //showing the preview map when page is ready
+        document.addEventListener("DOMContentLoaded", function() {
+            setPreviewMap({
+                mapDivId: "previewMap",
+                center: [58.1467, 7.9956], //initializes kristiansand areajson or latitude and longitutde 
+                zoom: 13,
+                tileLayerId: @Model.TileLayerId,
+                reportAreaJson: @Html.Raw(Json.Serialize(Model.ReportAreaJson ?? "null"))
+            });
+        });
     </script>
 }

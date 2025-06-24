@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("kartverket2025")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c0da8f56907c330d8d5e861fff85c6e99ea6bef")]
 [assembly: System.Reflection.AssemblyProductAttribute("kartverket2025")]
 [assembly: System.Reflection.AssemblyTitleAttribute("kartverket2025")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

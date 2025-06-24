@@ -1,9 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kartverket2025", "kartverket2025\kartverket2025.csproj", "{22CA7A4B-28E6-47B1-8EEA-197CD1F8196E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4FC752DD-C227-4675-9C3F-3B1B1A209AA6}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.override.yml = docker-compose.override.yml
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kartverket2025.unitTests", "kartverket2025.unitTests\kartverket2025.unitTests.csproj", "{8B440FAF-4550-4508-885D-DFE329A71E16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,10 @@ Global
 		{22CA7A4B-28E6-47B1-8EEA-197CD1F8196E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22CA7A4B-28E6-47B1-8EEA-197CD1F8196E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22CA7A4B-28E6-47B1-8EEA-197CD1F8196E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B440FAF-4550-4508-885D-DFE329A71E16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B440FAF-4550-4508-885D-DFE329A71E16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B440FAF-4550-4508-885D-DFE329A71E16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B440FAF-4550-4508-885D-DFE329A71E16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -124,3 +124,61 @@
         min-width: 0;
     }
 }
+
+
+/* Status pages (success, error, access denied) card max width and centering */
+.report-container.status-page {
+    max-width: 480px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 3rem auto;
+    padding: 2.5rem 2rem;
+    box-sizing: border-box;
+}
+
+/* Message box styling for status pages */
+.report-message-box {
+    background: rgba(162,89,236,0.08);
+    border-radius: 16px;
+    width: 100%;
+    padding: 2rem 1.2rem 1.5rem 1.2rem;
+    margin-bottom: 0;
+    box-shadow: none;
+}
+
+/* Button group for status pages */
+.report-btn-group {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+@media (max-width: 600px) {
+    .report-container.status-page {
+        max-width: 96vw;
+        padding: 1.2rem 0.4rem;
+    }
+
+    .report-btn-group {
+        flex-direction: column;
+        gap: 0.7em;
+        align-items: center;
+    }
+}
+
+/* Home forum/card sizing adjustment */
+.report-container.home-forum {
+    max-width: 540px;
+    margin: 4vw auto 0 auto;
+    min-height: 45vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Optional: make the card itself extra padded */
+.report-message-box {
+    padding: 2.2rem 2.3rem 2rem 2.3rem;
+}

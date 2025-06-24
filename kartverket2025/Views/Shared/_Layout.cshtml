@@ -31,9 +31,6 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="MapReport" asp-action="UserReportHistory">Reports</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="MapReport" asp-action="AddReport">Add map report</a>
-                            </li>
                         }
                         @if (signInManager.IsSignedIn(User) && (User.IsInRole("Case Handler")))
                         {

@@ -43,7 +43,7 @@ Dette prosjektet er en fullstack-applikasjon inspirert av Kartverket sine behov 
 
 ### Saksbehandling
 
-- Saksbehandlere kan tildele seg saker i status "Pending", oppdatere status, og eventuelt slette saker.
+- Saksbehandlere kan tildele seg saker i status "On the way", oppdatere status, og eventuelt slette saker.
 - Kun saksbehandler tilknyttet en sak kan utføre endringer etter behandling er startet.
 - Alle roller benytter autentisering via ASP.NET Identity.
 

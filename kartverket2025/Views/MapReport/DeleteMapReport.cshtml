@@ -1,9 +1,5 @@
 ﻿@model kartverket2025.Models.ViewModels.MapReportViewModel
 
-@{
-    ViewData["Title"] = "Delete Map Report";
-}
-
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <link rel="stylesheet" href="~/css/report.css" />
 
@@ -18,7 +14,7 @@
         <h4>Are you sure you want to delete this map report?</h4>
         <div class="report-info-table">
             <b>RapportID:</b> @Model.Id <br />
-            <b>Email:</b> @Model.Email <br />
+            <b>Innmelder:</b> @Model.FullName <br />
             <b>Beskrivelse:</b> @Model.ReportDescription <br />
             <b>Kommune:</b> @Model.ReportKommunenavn <br />
             <b>Fylke:</b> @Model.ReportFylkenavn <br />

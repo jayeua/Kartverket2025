@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  kartverket2025:
+    image: ${DOCKER_REGISTRY-}kartverket2025
+    build:
+      context: .
+      dockerfile: Kartverket2025/Dockerfile # <-- Update if your Dockerfile is elsewhere
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__MariaDbConnection=Server=mariadb;Database=KartverketDb;User=root;Password=kartverketdb
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: kartverketdb
+      MYSQL_DATABASE: KartverketDb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+volumes:
+  mariadb_data:

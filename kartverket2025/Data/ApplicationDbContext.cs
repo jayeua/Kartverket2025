@@ -56,35 +56,75 @@ namespace kartverket2025.Data
     };
 
             modelBuilder.Entity<IdentityRole>().HasData(roles); // 🔥 THIS LINE MAKES THE SEEDING WORK
-        
-        //    //seed MapUser
-        //var caseHandlerId = "2";
-        //var caseHandlerUser = new ApplicationUser
-        //{
-        //    Id = caseHandlerId,
-        //    UserName = "casehandler@test.com",
-        //    NormalizedUserName = "CASEHANDLER@TEST.COM",
-        //    Email = "casehandlertest@test.com",
-        //    NormalizedEmail = "CASEHANDLERTEST@TEST.COM",
-        //    FirstName = "Test",
-        //    LastName = "CaseHandler"
 
-        //};
-        
-        // caseHandlerUser.PasswordHash = new PasswordHasher<ApplicationUser>()
-        //        .HashPassword(caseHandlerUser, "caseHandler@123");
-        // modelBuilder.Entity<ApplicationUser>().HasData(caseHandlerUser);
+            //    //seed MapUser
+            // Seed users
+            var sysAdminId = "1";
+            var caseHandlerId = "2";
+            var mapUserId = "3";
 
-        //    modelBuilder.Entity<IdentityUserRole<string>>().HasData(
-        //        new IdentityUserRole<string>
-        //        {
-        //            RoleId = caseHandlerRoleId,
-        //            UserId = caseHandlerId
-        //        }
-        //        );
+            var hasher = new PasswordHasher<ApplicationUser>();
+
+            var sysAdminUser = new ApplicationUser
+            {
+                Id = sysAdminId,
+                UserName = "systemadmin@test.com",
+                NormalizedUserName = "SYSTEMADMIN@TEST.COM",
+                Email = "systemadmin@test.com",
+                NormalizedEmail = "SYSTEMADMIN@TEST.COM",
+                FirstName = "System",
+                LastName = "Admin",
+            };
+            sysAdminUser.PasswordHash = hasher.HashPassword(sysAdminUser, "systemadmin123@");
+
+            var caseHandlerUser = new ApplicationUser
+            {
+                Id = caseHandlerId,
+                UserName = "casehandler@test.com",
+                NormalizedUserName = "CASEHANDLER@TEST.COM",
+                Email = "casehandler@test.com",
+                NormalizedEmail = "CASEHANDLER@TEST.COM",
+                FirstName = "Case",
+                LastName = "Handler",
+            };
+            caseHandlerUser.PasswordHash = hasher.HashPassword(caseHandlerUser, "casehandler123@");
+
+            var mapUser = new ApplicationUser
+            {
+                Id = mapUserId,
+                UserName = "mapuser@test.com",
+                NormalizedUserName = "MAPUSER@TEST.COM",
+                Email = "mapuser@test.com",
+                NormalizedEmail = "MAPUSER@TEST.COM",
+                FirstName = "Map",
+                LastName = "User",
+            };
+            mapUser.PasswordHash = hasher.HashPassword(mapUser, "mapuser123@");
+
+            // Seed the users
+            modelBuilder.Entity<ApplicationUser>().HasData(sysAdminUser, caseHandlerUser, mapUser);
+
+            // Assign roles to users
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>
+                {
+                    UserId = sysAdminId,
+                    RoleId = sysAdminRoleId
+                },
+                new IdentityUserRole<string>
+                {
+                    UserId = caseHandlerId,
+                    RoleId = caseHandlerRoleId
+                },
+                new IdentityUserRole<string>
+                {
+                    UserId = mapUserId,
+                    RoleId = mapUserRoleId
+                }
+            );
 
 
-        modelBuilder.Entity<MapReportModel>()
+            modelBuilder.Entity<MapReportModel>()
                 .HasKey(m => m.Id);
         modelBuilder.Entity<MapReportStatus>()
                 .HasKey(m => m.Id);

@@ -1,0 +1,27 @@
+﻿@model kartverket2025.Models.ViewModels.ProfilePageViewModel
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "_Layout";
+}
+<link rel="stylesheet" href="~/css/profilepage.css" />
+<div class="profile-outer">
+    <div class="profile-card">
+        <img src="~/images/mapuserpfp.svg" alt="Profile Picture" class="profile-picture" />
+        <h1 class="profile-title">Profile</h1>
+        <div class="profile-fields">
+            <div class="profile-field">
+                <label>First Name:</label>
+                <span>@Model.FirstName</span>
+            </div>
+            <div class="profile-field">
+                <label>Last Name:</label>
+                <span>@Model.LastName</span>
+            </div>
+            <div class="profile-field">
+                <label>Role:</label>
+                <span>@Model.Role</span>
+            </div>
+        </div>
+        <a href="@Url.Action("Settings", "Account")" class="profile-btn">Edit Settings</a>
+    </div>
+</div>

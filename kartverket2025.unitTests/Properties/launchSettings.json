@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "kartverket2025.unitTests": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

@@ -5,6 +5,7 @@ using kartverket2025.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace kartverket2025.Controllers
 {
@@ -35,7 +36,7 @@ namespace kartverket2025.Controllers
             {
                 var newMapReport = new MapReportModel
                 {
-                    UserName = currentUser.UserName,
+                    ApplicationUserId = currentUser.Id,
                     Email = currentUser.Email,
                     Kommunenavn = mapReportViewModel.ReportKommunenavn,
                     Fylkenavn = mapReportViewModel.ReportFylkenavn,
@@ -44,6 +45,7 @@ namespace kartverket2025.Controllers
                     AreaJson = mapReportViewModel.ReportAreaJson,
                     TileLayerId = mapReportViewModel.TileLayerId,
                     MapReportStatusId = 1,
+                    MapPriorityStatusId = 1,
                     Date = DateTime.Now 
                 };
 
@@ -75,7 +77,7 @@ namespace kartverket2025.Controllers
             {
                 var newMapReport = new MapReportModel
                 {
-                    UserName = currentUser.UserName,
+                    ApplicationUserId = currentUser.Id,
                     Email = currentUser.Email,
                     Kommunenavn = mapReportViewModel.ReportKommunenavn,
                     Fylkenavn = mapReportViewModel.ReportFylkenavn,
@@ -84,6 +86,7 @@ namespace kartverket2025.Controllers
                     AreaJson = mapReportViewModel.ReportAreaJson,
                     TileLayerId = mapReportViewModel.TileLayerId,
                     MapReportStatusId = 1,
+                    MapPriorityStatusId = 1,
                     Date = DateTime.Now
                 };
 
@@ -96,34 +99,8 @@ namespace kartverket2025.Controllers
             return View("AddReport", mapReportViewModel);
         }
 
-        //[Authorize(Roles = "Map User, Case Handler")]
-        //[HttpGet]
-        //public async Task<IActionResult> UserReportHistory()
-        //{
-        //    var getReportHistory = await _mapReportRepository.GetAllReportAsync();
-        //    var userReporter = await _userManager.GetUserAsync(User);
-
-        //    if (getReportHistory != null && userReporter != null)
-        //    {
-        //        var mapReportViewModel = getReportHistory.Where(e => e.Email == userReporter.Email)
-        //            .Select(u => new MapReportViewModel
-        //            {
-        //                CaseHandler = u.CaseHandler ?? "No Casehandler",
-        //                ReportDescription = u.Description,
-        //                ReportAreaJson = u.AreaJson,
-        //                ReportFylkenavn = u.Fylkenavn,
-        //                ReportKommunenavn = u.Kommunenavn,
-        //                Id = u.Id,
-        //                Status = u.MapReportStatusModel.Status,
-        //                ReportDate = u.Date
-        //            }
-        //        );
-        //        return View(mapReportViewModel);
-        //    }
-        //    return View(new List<MapReportViewModel>());
-
-        //}
-
+        [Authorize(Roles = "Map User, Case Handler")]
+        [HttpGet]
         public async Task<IActionResult> UserReportHistory(string? searchQuery, int pageSize = 5, int pageNumber = 1)
         {
             var allReports = await _mapReportRepository.GetAllReportAsync();
@@ -179,28 +156,6 @@ namespace kartverket2025.Controllers
 
             return View(pagedModel);
         }
-        //[Authorize(Roles = "Case Handler")]
-        //[HttpGet]
-        //public async Task<IActionResult> AllMapReportsOverview()
-        //{
-        //    var getOverView = await _mapReportRepository.GetAllReportAsync();
-        //    if (getOverView != null)
-        //    {
-        //        var mapReportViewModel = getOverView.Select(u => new MapReportViewModel
-        //        {
-        //            ReportKommunenavn = u.Kommunenavn,
-        //            ReportFylkenavn = u.Fylkenavn,
-        //            ReportDescription = u.Description,
-        //            ReportAreaJson = u.AreaJson,
-        //            ReportDate = u.Date,
-        //            Email = u.Email,
-        //            Id = u.Id,
-        //            Status = u.MapReportStatusModel.Status
-        //        }).ToList();
-        //        return View(mapReportViewModel);
-        //    }
-        //    return NotFound();
-        //}
 
         [Authorize(Roles = "Case Handler")]
         [HttpGet]
@@ -213,12 +168,16 @@ namespace kartverket2025.Controllers
             if (!string.IsNullOrEmpty(searchQuery))
             {
                 allReports = allReports
-                    .Where(r =>
-                        (r.Email != null && r.Email.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
-                        (r.Title != null && r.Description.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
-                        (r.Kommunenavn != null && r.Kommunenavn.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
-                        (r.Fylkenavn != null && r.Fylkenavn.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)))
-                    .ToList();
+                .Where(r =>
+                    (r.Email != null && r.Email.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
+                    (r.Title != null && r.Title.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
+                    (r.Kommunenavn != null && r.Kommunenavn.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
+                    (r.Fylkenavn != null && r.Fylkenavn.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
+                    // adding more properties here
+                    (r.Description != null && r.Description.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
+                    (r.MapReportStatusModel != null && r.MapReportStatusModel.Status != null && r.MapReportStatusModel.Status.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)) ||
+                    (r.MapPriorityStatusModel != null && r.MapPriorityStatusModel.PriorityStatus != null && r.MapPriorityStatusModel.PriorityStatus.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)))
+                .ToList();
             }
 
             var totalRecords = allReports.Count();
@@ -233,14 +192,16 @@ namespace kartverket2025.Controllers
                 .Take(pageSize)
                 .Select(u => new MapReportViewModel
                 {
+                    Id = u.Id,
                     ReportTitle = u.Title,
+                    Email = u.Email,
                     ReportKommunenavn = u.Kommunenavn,
                     ReportFylkenavn = u.Fylkenavn,
                     ReportAreaJson = u.AreaJson,
                     ReportDate = u.Date,
-                    Email = u.Email,
-                    Id = u.Id,
-                    Status = u.MapReportStatusModel.Status
+                    FullName = u.ApplicationUserModel != null ? u.ApplicationUserModel.FullName : "",
+                    Status = u.MapReportStatusModel.Status,
+                    Priority = u.MapPriorityStatusModel != null ? u.MapPriorityStatusModel.PriorityStatus : ""
                 })
                 .ToList();
 
@@ -261,18 +222,40 @@ namespace kartverket2025.Controllers
         public async Task<IActionResult> UpdateMapReport(int id)
         {
             var updateCurrentMap = await _mapReportRepository.FindCaseById(id);
+
             if (updateCurrentMap != null)
             {
                 MapReportViewModel mapReportViewModel = new MapReportViewModel
                 {
                     Id = updateCurrentMap.Id,
+                    ReportTitle = updateCurrentMap.Title,
                     ReportDescription = updateCurrentMap.Description,
                     ReportKommunenavn = updateCurrentMap.Kommunenavn,
                     ReportFylkenavn = updateCurrentMap.Fylkenavn,
                     ReportAreaJson = updateCurrentMap.AreaJson,
                     ReportDate = updateCurrentMap.Date,
-                    CaseHandler = updateCurrentMap.CaseHandler
+                    CaseHandler = updateCurrentMap.CaseHandler,
+                    MapReportStatusId = updateCurrentMap.MapReportStatusId,
+                    MapPriorityStatusId = updateCurrentMap.MapPriorityStatusId ?? 1,
+                    TileLayerId = updateCurrentMap.TileLayerId
                 };
+
+                var statuses = await _mapReportRepository.GetAllStatusesAsync();
+                mapReportViewModel.StatusOptions = statuses
+                    .Select(s => new SelectListItem
+                    {
+                        Value = s.Id.ToString(),
+                        Text = s.Status,
+                        Selected = s.Id == mapReportViewModel.MapReportStatusId
+                    });
+
+                var priorities = await _mapReportRepository.GetAllPriorityStatusesAsync();
+                mapReportViewModel.PriorityOptions = priorities.Select(p => new SelectListItem
+                {
+                    Value = p.Id.ToString(),
+                    Text = p.PriorityStatus,
+                    Selected = p.Id == mapReportViewModel.MapPriorityStatusId
+                });
 
                 return View(mapReportViewModel); // This will use UpdateMapReport.cshtml
             }
@@ -286,7 +269,23 @@ namespace kartverket2025.Controllers
         {
             if (!ModelState.IsValid)
             {
-                // Re-render form with validation errors
+                // Repopulate dropdowns!
+                var statuses = await _mapReportRepository.GetAllStatusesAsync();
+                mapReportViewModel.StatusOptions = statuses.Select(s => new SelectListItem
+                {
+                    Value = s.Id.ToString(),
+                    Text = s.Status,
+                    Selected = s.Id == mapReportViewModel.MapReportStatusId
+                });
+
+                var priorities = await _mapReportRepository.GetAllPriorityStatusesAsync();
+                mapReportViewModel.PriorityOptions = priorities.Select(p => new SelectListItem
+                {
+                    Value = p.Id.ToString(),
+                    Text = p.PriorityStatus,
+                    Selected = p.Id == mapReportViewModel.MapPriorityStatusId
+                });
+
                 return View(mapReportViewModel);
             }
 
@@ -298,12 +297,15 @@ namespace kartverket2025.Controllers
             }
 
             // Update properties
-            mapToUpdateReport.Description = mapReportViewModel.ReportDescription;
-            mapToUpdateReport.AreaJson = mapReportViewModel.ReportAreaJson;
-            mapToUpdateReport.Kommunenavn = mapReportViewModel.ReportKommunenavn;
-            mapToUpdateReport.Fylkenavn = mapReportViewModel.ReportFylkenavn;
+            //mapToUpdateReport.Description = mapReportViewModel.ReportDescription;
+            //mapToUpdateReport.AreaJson = mapReportViewModel.ReportAreaJson;
+            //mapToUpdateReport.Kommunenavn = mapReportViewModel.ReportKommunenavn;
+            //mapToUpdateReport.Fylkenavn = mapReportViewModel.ReportFylkenavn;
             mapToUpdateReport.Date = DateTime.Now;
             mapToUpdateReport.CaseHandler = $"{casehandler.FirstName} {casehandler.LastName}";
+            mapToUpdateReport.MapReportStatusId = mapReportViewModel.MapReportStatusId;
+            mapToUpdateReport.MapPriorityStatusId = mapReportViewModel.MapPriorityStatusId;
+            mapToUpdateReport.TileLayerId = mapReportViewModel.TileLayerId;
 
             await _mapReportRepository.UpdateReportAsync(mapToUpdateReport);
 
@@ -347,11 +349,14 @@ namespace kartverket2025.Controllers
             var viewModel = new MapReportViewModel
             {
                 Id = mapReport.Id,
-                Email = mapReport.Email,
+                FullName = mapReport.ApplicationUserModel != null ? mapReport.ApplicationUserModel.FullName : "",
                 ReportDescription = mapReport.Description,
                 ReportKommunenavn = mapReport.Kommunenavn,
                 ReportFylkenavn = mapReport.Fylkenavn,
-                Status = mapReport.MapReportStatusModel.Status
+                Status = mapReport.MapReportStatusModel.Status,
+                ReportAreaJson = mapReport.AreaJson,
+                TileLayerId = mapReport.TileLayerId
+
             };
 
             return View(viewModel); // This will use DeleteMapReport.cshtml
@@ -375,7 +380,7 @@ namespace kartverket2025.Controllers
             else
             {
                 // fallback (shouldn’t happen if you only allow above roles)
-                return RedirectToAction("AllMapReportsOverview");
+                return RedirectToAction("UserReportHistory");
             }
         }
 

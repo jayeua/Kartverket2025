@@ -120,6 +120,24 @@ Prosjektet følger MVC-arkitektur og repository pattern for å skille logikk, da
 - Saksbehandler kan endre status, tildele seg saker, og følge opp.
 - All tilgang og funksjon er rollebasert og sikret via ASP.NET Identity.
 
+## Systemstruktur
+
+Under følger en oversikt over de viktigste komponentene i prosjektet **Kartverket2025** og en kort beskrivelse av hver komponent:
+
+| **Komponent**         | **Beskrivelse**                                                                                   |
+|----------------------|---------------------------------------------------------------------------------------------------|
+| **kartverket2025**   | Hovedprosjektet som inneholder hele applikasjonen.                                                |
+| **Data**             | Inneholder `ApplicationDbContext` og håndterer tilkobling mot MariaDB, migrasjoner og seed-data.  |
+| **Controllers**      | Inneholder alle kontrollere (f.eks. `MapReportController`) som styrer flyten mellom view og modell.|
+| **Models/DomainModels** | Lagrer domene- og datamodeller (f.eks. `MapReportModel`) som brukes på tvers av applikasjonen.  |
+| **Models/ViewModels** | Inneholder view-modeller som brukes for å presentere og flytte data mellom backend og frontend.   |
+| **Repositories**     | Implementerer repository pattern for datatilgang og CRUD-operasjoner (f.eks. `MapReportRepository`).|
+| **Services**         | Inneholder tjenester som sender e-post, autentisering mm., og koordinerer samspillet mellom lagene.|
+| **Migrations**       | Inneholder automatisk generert kode for Entity Framework migrasjoner.                             |
+| **wwwroot**          | Inneholder statiske filer som JavaScript, CSS og bilder.                                          |
+| **Views**            | Razor views som presenterer data i brukergrensesnittet.                                           |
+
+
 ## Teknologier
 
 - **ASP.NET Core MVC 8.0** – Backend og autentisering

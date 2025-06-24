@@ -51,6 +51,9 @@ namespace kartverket2025.Controllers
 
                 await _mapReportRepository.AddReportAsync(newMapReport);
 
+                // Set session flag so SuccessReport can be shown
+                HttpContext.Session.SetString("JustReported", "true");
+
                 // Redirect to the success report page
                 return RedirectToAction("SuccessReport");
             }
@@ -92,6 +95,10 @@ namespace kartverket2025.Controllers
 
                 await _mapReportRepository.AddReportAsync(newMapReport);
 
+                // Set session flag so SuccessReport can be shown
+                HttpContext.Session.SetString("JustReported", "true");
+
+                // Redirect to the success report page
                 return RedirectToAction("SuccessReport");
             }
 
@@ -217,49 +224,73 @@ namespace kartverket2025.Controllers
             return View(overviewPaged);
         }
 
-        [Authorize(Roles ="Case Handler")]
+        [Authorize(Roles = "Case Handler")]
         [HttpGet]
         public async Task<IActionResult> UpdateMapReport(int id)
         {
+            // Fetch the report by ID
             var updateCurrentMap = await _mapReportRepository.FindCaseById(id);
 
-            if (updateCurrentMap != null)
+            // If report does not exist, return 404
+            if (updateCurrentMap == null)
             {
-                MapReportViewModel mapReportViewModel = new MapReportViewModel
-                {
-                    Id = updateCurrentMap.Id,
-                    ReportTitle = updateCurrentMap.Title,
-                    ReportDescription = updateCurrentMap.Description,
-                    ReportKommunenavn = updateCurrentMap.Kommunenavn,
-                    ReportFylkenavn = updateCurrentMap.Fylkenavn,
-                    ReportAreaJson = updateCurrentMap.AreaJson,
-                    ReportDate = updateCurrentMap.Date,
-                    CaseHandler = updateCurrentMap.CaseHandler,
-                    MapReportStatusId = updateCurrentMap.MapReportStatusId,
-                    MapPriorityStatusId = updateCurrentMap.MapPriorityStatusId ?? 1,
-                    TileLayerId = updateCurrentMap.TileLayerId
-                };
+                return NotFound($"Map report with ID {id} not found");
+            }
 
-                var statuses = await _mapReportRepository.GetAllStatusesAsync();
-                mapReportViewModel.StatusOptions = statuses
-                    .Select(s => new SelectListItem
-                    {
-                        Value = s.Id.ToString(),
-                        Text = s.Status,
-                        Selected = s.Id == mapReportViewModel.MapReportStatusId
-                    });
+            // Block access if the report is already completed or denied
+            // Status ID 3 = Completed, 4 = Denied (Check your seeding for these values)
+            if (updateCurrentMap.MapReportStatusId == 3)
+            {
+                // Set a TempData message for user feedback after redirect
+                TempData["Message"] = "You cannot update this report because it is already completed.";
+                // Redirect to the overview page
+                return RedirectToAction("AllMapReportsOverview");
+            }
+            if (updateCurrentMap.MapReportStatusId == 4)
+            {
+                // Set a TempData message for user feedback after redirect
+                TempData["Message"] = "You cannot update this report because it is already denied.";
+                // Redirect to the overview page
+                return RedirectToAction("AllMapReportsOverview");
+            }
 
-                var priorities = await _mapReportRepository.GetAllPriorityStatusesAsync();
-                mapReportViewModel.PriorityOptions = priorities.Select(p => new SelectListItem
+            // If allowed, prepare the viewmodel
+            MapReportViewModel mapReportViewModel = new MapReportViewModel
+            {
+                Id = updateCurrentMap.Id,
+                ReportTitle = updateCurrentMap.Title,
+                ReportDescription = updateCurrentMap.Description,
+                ReportKommunenavn = updateCurrentMap.Kommunenavn,
+                ReportFylkenavn = updateCurrentMap.Fylkenavn,
+                ReportAreaJson = updateCurrentMap.AreaJson,
+                ReportDate = updateCurrentMap.Date,
+                CaseHandler = updateCurrentMap.CaseHandler,
+                MapReportStatusId = updateCurrentMap.MapReportStatusId,
+                MapPriorityStatusId = updateCurrentMap.MapPriorityStatusId ?? 1,
+                TileLayerId = updateCurrentMap.TileLayerId
+            };
+
+            // Populate dropdowns for statuses
+            var statuses = await _mapReportRepository.GetAllStatusesAsync();
+            mapReportViewModel.StatusOptions = statuses
+                .Select(s => new SelectListItem
                 {
-                    Value = p.Id.ToString(),
-                    Text = p.PriorityStatus,
-                    Selected = p.Id == mapReportViewModel.MapPriorityStatusId
+                    Value = s.Id.ToString(),
+                    Text = s.Status,
+                    Selected = s.Id == mapReportViewModel.MapReportStatusId
                 });
 
-                return View(mapReportViewModel); // This will use UpdateMapReport.cshtml
-            }
-            return NotFound($"Map report with ID {id} not found");
+            // Populate dropdowns for priorities
+            var priorities = await _mapReportRepository.GetAllPriorityStatusesAsync();
+            mapReportViewModel.PriorityOptions = priorities.Select(p => new SelectListItem
+            {
+                Value = p.Id.ToString(),
+                Text = p.PriorityStatus,
+                Selected = p.Id == mapReportViewModel.MapPriorityStatusId
+            });
+
+            // Render the update view
+            return View(mapReportViewModel); // This will use UpdateMapReport.cshtml
         }
 
         [Authorize(Roles = "Case Handler")]
@@ -296,11 +327,6 @@ namespace kartverket2025.Controllers
                 return NotFound($"Map report with ID {mapReportViewModel.Id} is not found.");
             }
 
-            // Update properties
-            //mapToUpdateReport.Description = mapReportViewModel.ReportDescription;
-            //mapToUpdateReport.AreaJson = mapReportViewModel.ReportAreaJson;
-            //mapToUpdateReport.Kommunenavn = mapReportViewModel.ReportKommunenavn;
-            //mapToUpdateReport.Fylkenavn = mapReportViewModel.ReportFylkenavn;
             mapToUpdateReport.Date = DateTime.Now;
             mapToUpdateReport.CaseHandler = $"{casehandler.FirstName} {casehandler.LastName}";
             mapToUpdateReport.MapReportStatusId = mapReportViewModel.MapReportStatusId;
@@ -311,30 +337,8 @@ namespace kartverket2025.Controllers
 
             // Redirect to overview or success page
             return RedirectToAction("AllMapReportsOverview");
+
         }
-
-        [Authorize(Roles = "Case Handler")]
-        [HttpPost]
-        public async Task<IActionResult> FinishReport(MapReportViewModel mapReportViewModel)
-        {
-            var mapToUpdate = await _mapReportRepository.FindCaseById(mapReportViewModel.Id);
-            var casehandler = await _userManager.GetUserAsync(User);
-
-            if (mapToUpdate != null && mapToUpdate.MapReportStatusId != 3)
-            {
-                mapToUpdate.MapReportStatusId = 3; // Set status to Finished
-                mapToUpdate.Date = DateTime.Now;
-                mapToUpdate.CaseHandler = $"{casehandler.FirstName} {casehandler.LastName}"; // Set case handler
-
-                await _mapReportRepository.UpdateReportAsync(mapToUpdate);
-                return RedirectToAction("AllMapReportsOverview");
-
-
-            }
-            return BadRequest("The case has already been finished or does not exist.");
-        }
-
-        // --- ADD THIS: GET: DeleteMapReport (confirmation page) ---
         [Authorize(Roles = "Map User, Case Handler")]
         [HttpGet]
         public async Task<IActionResult> DeleteMapReport(int id)
@@ -349,6 +353,7 @@ namespace kartverket2025.Controllers
             var viewModel = new MapReportViewModel
             {
                 Id = mapReport.Id,
+                ReportTitle = mapReport.Title,
                 FullName = mapReport.ApplicationUserModel != null ? mapReport.ApplicationUserModel.FullName : "",
                 ReportDescription = mapReport.Description,
                 ReportKommunenavn = mapReport.Kommunenavn,
@@ -384,10 +389,17 @@ namespace kartverket2025.Controllers
             }
         }
 
+        [Authorize(Roles = "Map User, Case Handler")]
         [HttpGet]
         public IActionResult SuccessReport()
         {
-            return View();
+            if (HttpContext.Session.GetString("JustReported") == "true")
+            {
+                HttpContext.Session.Remove("JustReported"); // one-time access
+                return View();
+            }
+            // If not just reported, redirect away (e.g., back to AddReport)
+            return RedirectToAction("AddReport");
         }
     }
 }

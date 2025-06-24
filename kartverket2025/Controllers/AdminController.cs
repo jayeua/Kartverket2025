@@ -20,6 +20,7 @@ namespace kartverket2025.Controllers
         }
 
         [Authorize(Roles = "System Admin")]
+        [HttpGet]
         public async Task<IActionResult> UsersList(string? searchQuery, int pageSize = 10, int pageNumber = 1)
         {
             var allUsers = await GetUsersAsync();

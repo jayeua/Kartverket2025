@@ -98,10 +98,10 @@ namespace kartverket2025.Data
                     .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<MapReportStatus>().HasData(
-                new MapReportStatus { Id= 1, Status = "Waiting"},
+                new MapReportStatus { Id= 1, Status = "Under way..."},
                 new MapReportStatus { Id = 2, Status = "On the way" },
-                new MapReportStatus { Id = 3, Status = "Finished" },
-                new MapReportStatus { Id = 4, Status = "Revoked" }
+                new MapReportStatus { Id = 3, Status = "Completed" },
+                new MapReportStatus { Id = 4, Status = "Denied" }
                 );
         modelBuilder.Entity<MapPriorityStatus>().HasData(
                 new MapPriorityStatus { Id = 1, PriorityStatus = "Low" },

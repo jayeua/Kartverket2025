@@ -3,6 +3,7 @@
 Kartverketprosjekt – En fullstack webapplikasjon for innmelding og behandling av kartfeil
 
 ---
+![image](https://github.com/user-attachments/assets/2dbcf160-3ac3-4c40-95a4-eeaae92b3d20)
 
 ## Innholdsfortegnelse
 

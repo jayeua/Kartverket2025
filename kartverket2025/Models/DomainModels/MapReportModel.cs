@@ -3,7 +3,9 @@
     public class MapReportModel
     {
         public int Id {  get; set; }
-        public string? UserName { get; set; }
+        //public string? UserName { get; set; }
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser? ApplicationUserModel { get; set; } // Navigation property to ApplicationUser
         public string? Title { get; set; }
         public string? Description { get; set; }
         public DateTime? Date { get ; set; }
@@ -19,6 +21,7 @@
         public MapReportStatus? MapReportStatusModel { get; set; }
         public MapPriorityStatus? MapPriorityStatusModel { get; set; }
         public int MapReportStatusId { get; set; }
-        
+        public int? MapPriorityStatusId { get; set; }
+
     }
 }

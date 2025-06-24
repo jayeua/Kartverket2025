@@ -1,8 +1,54 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@using kartverket2025.Models.DomainModels
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<head>
+    <link rel="stylesheet" href="~/css/report.css" />
+</head>
+
 <!-- Static background image for home page only -->
 <div class="center-container"></div>
 
-@* <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div> *@
+<div class="report-container home-forum">
+    <div class="report-message-box">
+        @if (!SignInManager.IsSignedIn(User))
+        {
+            <h2 class="report-title">Velkommen til Kartverket</h2>
+            <p>Er du ofte ute på tur og legger merke til feil eller mangler i naturen?</p> <br />
+            <a href="@Url.Action("AddReport", "MapReport")" class="report-btn" style="margin-bottom:1rem;">
+                Meld deg inn
+            </a>
+            <br />
+            <div style="font-size:0.98rem;color:#444;">
+                <br /> 
+                For å melde inn kartfeil må du
+                <a href="@Url.Action("Register", "Account")" class="register-link" style="color:#a259ec;text-decoration:underline;">registrere deg nå</a>
+            </div>
+        }
+        else if (User.IsInRole("Map User"))
+        {
+            <h2 class="report-title">Takk for at du bidrar!</h2>
+            <p>Oppdager du feil eller mangler i terrenget? Meld dem inn her.</p>
+            <a href="@Url.Action("AddReport", "MapReport")" class="report-btn">
+                Meld inn i kartet
+            </a>
+        }
+        else if (User.IsInRole("Case Handler"))
+        {
+            <h2 class="report-title">Saksbehandleroversikt</h2>
+            <p>Klar for å gjennomgå og følge opp rapporterte kartfeil?</p>
+            <a href="@Url.Action("AllMapReportsOverview", "MapReport")" class="report-btn secondary">
+                Se over alle innmeldinger
+            </a>
+        }
+        else if (User.IsInRole("System Admin"))
+        {
+            <h2 class="report-title">Administratorpanel</h2>
+            <p>Få oversikt over brukere og systeminnstillinger.</p>
+            <a href="@Url.Action("UserList", "Admin")" class="report-btn secondary">
+                Se over alle brukere
+            </a>
+        }
+    </div>
+</div>

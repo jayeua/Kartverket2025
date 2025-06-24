@@ -83,15 +83,33 @@
         /*
     Only apply aggressive word breaking and scrolling to Beskrivelse (Description) column.
     Prevents other columns like email from breaking oddly.
-*/
-        .table td:nth-child(3) { /* Beskrivelse column */
-            max-width: 220px; /* Restricts width of description */
-            white-space: pre-line; /* Preserves line breaks and wraps */
-            word-break: break-word; /* Breaks long words if needed */
-            overflow: auto; /* Scroll if content overflows */
-            /* For single-line with ellipsis, use:
-       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    */
+*/       
+        /* Title column */
+        .table td:nth-child(2),
+        .table th:nth-child(2) {
+            min-width: 100px;   /*adjusting the width of the row*/
+            white-space: nowrap;
+            word-break: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        /* Email column */
+        .table td:nth-child(3),
+        .table th:nth-child(3) {
+            min-width: 100px; /*adjusting the width of the row*/
+            white-space: nowrap;
+            word-break: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .table td:nth-child(6),
+        .table th:nth-child(6) {
+            min-width: 120px; /*adjusting the width of the row*/
+            white-space: nowrap;
+            word-break: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         /* 
@@ -194,11 +212,11 @@ h2 {
     /* 
     Action button variant: Finish. Green background and darker on hover.
 */
-    .action-btn.finish {
+    .action-btn.end {
         background: #6fbf73;
     }
 
-        .action-btn.finish:hover {
+        .action-btn.end:hover {
             background: #44a163;
         }
 

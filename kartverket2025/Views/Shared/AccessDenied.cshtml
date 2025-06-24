@@ -1,10 +1,18 @@
 ﻿
-<div class="container mt-5">
-<h2>Access Denied</h2>
-<p>You don't have access to this page.</p>
-<div class="text-center mt-4">
-    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary ms-2">
-        Back to Home
-    </a>
-</div>
+<head>
+    <link rel="stylesheet" href="~/css/report.css" />
+</head>
+
+<div class="report-container status-page">
+    <div class="report-message-box">
+        <h2 class="report-title" style="color:#e052b4;">Access Denied</h2>
+        <p style="font-size:1.1rem; color:#a259ec;">
+            You don't have access to this page.
+        </p>
+    </div>
+    <div class="report-btn-group">
+        <a href="@Url.Action("Index", "Home")" class="report-btn secondary">
+            Back to Home
+        </a>
+    </div>
 </div>

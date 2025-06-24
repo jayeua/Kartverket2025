@@ -12,5 +12,7 @@ namespace kartverket2025.Repositories
 
         Task<MapReportModel?> UpdateReportAsync(MapReportModel mapReportRepository);
         Task<MapReportModel?> DeleteReportAsync(int id);
+        Task<List<MapReportStatus>> GetAllStatusesAsync();
+        Task<List<MapPriorityStatus>> GetAllPriorityStatusesAsync();
     }
 }

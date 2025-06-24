@@ -46,12 +46,22 @@ namespace kartverket2025.Repositories
 
         public async Task<IEnumerable<MapReportModel>> GetAllReportAsync()
         {
-            return await kartDbContext.MapReport.Include(x => x.MapReportStatusModel).ToListAsync();
+            return await kartDbContext.MapReport
+                .Include(r => r.ApplicationUserModel)
+                .Include(x => x.MapReportStatusModel)
+                .Include(x => x.MapPriorityStatusModel) // <-- ADD THIS LINE
+                .ToListAsync();
+                
         }
 
         public async Task<MapReportModel?> FindCaseById(int id)
         {
-            return await kartDbContext.MapReport.Include(x => x.MapReportStatusModel).Where(s => s.Id == id).FirstOrDefaultAsync();
+            return await kartDbContext.MapReport
+                .Include(x => x.ApplicationUserModel)
+                .Include(x => x.MapReportStatusModel)
+                .Include(x => x.MapPriorityStatusModel) // <-- ADD THIS LINE
+                .Where(s => s.Id == id)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<MapReportModel?> UpdateReportAsync(MapReportModel mapReport)
@@ -60,6 +70,14 @@ namespace kartverket2025.Repositories
             await kartDbContext.SaveChangesAsync();
             return mapReport;
         }
+        public async Task<List<MapReportStatus>> GetAllStatusesAsync()
+        {
+            return await kartDbContext.MapReportStatus.ToListAsync();
+        }
 
+        public async Task<List<MapPriorityStatus>> GetAllPriorityStatusesAsync()
+        {
+            return await kartDbContext.MapPriorityStatus.ToListAsync();
+        }
     }
 }

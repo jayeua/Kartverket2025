@@ -21,12 +21,14 @@
             <thead>
                 <tr class="table-header">
                     <th>InnmeldingerID</th>
-                    <th>Email</th>
                     <th>Title</th>
+                    <th>Innmelder</th>
+                    <th>Email</th>
                     <th>Kommune</th>
-                    <th>Fylke</th>
+                    @* <th>Fylke</th> *@
                     <th>Status</th>
-                    <th>Sist Oppdatert</th>
+                    <th>Priority</th>
+                    <th>Last Update</th>
                     <th> </th>  
                 </tr>
             </thead>
@@ -43,21 +45,23 @@
                     {
                         <tr>
                             <td>@report.Id</td>
-                            <td>@report.Email</td>
                             <td>@report.ReportTitle</td>
+                            <td>@report.FullName</td>
+                            <td>@report.Email</td>
                             <td>@report.ReportKommunenavn</td>
-                            <td>@report.ReportFylkenavn</td>
+                            @* <td>@report.ReportFylkenavn</td> *@
                             <td>@report.Status</td>
+                            <td>@report.Priority</td>
                             <td>@(report.ReportDate?.ToString("yyyy-MM-dd HH:mm") ?? "")</td>
                             <td>
                                 <div class="action-btn-group">
-                                    @if (!string.Equals(report.Status, "Finished", StringComparison.OrdinalIgnoreCase))
+                                    @if (!string.Equals(report.Status, "Completed", StringComparison.OrdinalIgnoreCase) && !string.Equals(report.Status, "Denied", StringComparison.OrdinalIgnoreCase))
                                     {
                                         <a href="@Url.Action("UpdateMapReport", "MapReport", new { id = report.Id })" class="action-btn edit">View</a>
-                                        <form asp-action="FinishReport" asp-controller="MapReport" method="post" style="display:inline;">
+                                       @*  <form asp-action="FinishReport" asp-controller="MapReport" method="post" onsubmit="return confirm('Are you sure you want to end this report?');">
                                             <input type="hidden" name="id" value="@report.Id" />
-                                            <button type="submit" class="action-btn finish">Finish</button>
-                                        </form>
+                                            <button type="submit" class="action-btn end">End</button>
+                                        </form> *@
                                     }
                                     <a asp-action="DeleteMapReport" asp-controller="MapReport" asp-route-id="@report.Id" class="action-btn delete">Delete</a>
                                 </div>

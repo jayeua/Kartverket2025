@@ -59,8 +59,15 @@
             </div>
         </nav>
     </header>
-
     <div class="container">
+        @* Display TempData messages *@
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+                @TempData["Message"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

@@ -2,6 +2,7 @@ using kartverket2025.Data;
 using kartverket2025.Models.DomainModels;
 using kartverket2025.Models.ViewModels;
 using kartverket2025.Repositories;
+using kartverket2025.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,8 +21,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IMapReportRepository, MapReportRepository>();
 builder.Services.AddScoped<IUsersListRepository, UsersListRepository>();
-
-
+builder.Services.Configure<EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+// In Program.cs or Startup.cs
+builder.Services.AddSession();
 // Configure identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
@@ -46,7 +50,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login/";
-    options.AccessDeniedPath = "/Shared/AccessDenied/";
+    options.AccessDeniedPath = "/Account/AccessDenied/";
     options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
     options.SlidingExpiration = true;
     options.Cookie.HttpOnly = true;
@@ -97,6 +101,8 @@ app.Use(async (context, next) =>
     await next();
 });
 
+;
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

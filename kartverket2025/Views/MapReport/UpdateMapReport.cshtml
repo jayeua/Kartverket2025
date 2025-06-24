@@ -1,42 +1,88 @@
 ﻿@model kartverket2025.Models.ViewModels.MapReportViewModel
 
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" href="~/css/report.css" />
+
+<div class="report-container">
+    <div class="report-map">
+        <div id="updateMap" style="height:400px; width:100%;"></div>
+        <!-- Karttype select visually under the map, but not in the right column -->
+        <div style="margin-top: 18px; text-align: left;">
+            <label class="karttype-label" for="karttypeSelect">Karttype:</label>
+            <select id="karttypeSelect" class="karttype-select report-input">
+                <option value="1">Topofarge</option>
+                <option value="2">Topogråtone</option>
+                <option value="3">Turkart</option>
+                <option value="4">Sjøkart</option>
+                <option value="5">Carto Light</option>
+                <option value="6">Carto Dark</option>
+            </select>
+        </div>
+    </div>
+    <div class="report-info">
+        <span class="report-title">@Model.ReportTitle</span>
+        <form asp-action="UpdateMapReport" method="post" id="updateMapForm">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="All"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="TileLayerId" id="TileLayerId" />
+            <input type="hidden" asp-for="ReportAreaJson" />
+            <input type="hidden" asp-for="ReportDescription" />
+            <input type="hidden" asp-for="ReportKommunenavn" class="report-input" placeholder="Kommune" />
+            <input type="hidden" asp-for="ReportFylkenavn" class="report-input" placeholder="Fylke" />
+
+            <label asp-for="MapReportStatusId" class="report-label">Status</label>
+            <select asp-for="MapReportStatusId" class="report-input" asp-items="Model.StatusOptions"></select>
+
+            <label asp-for="MapPriorityStatusId" class="report-label">Prioritet</label>
+            <select asp-for="MapPriorityStatusId" class="report-input" asp-items="Model.PriorityOptions"></select>
+             
+            <br />
+            <br>
+            <div class="report-info-table">
+                <b>Beskrivelse:</b> @Model.ReportDescription <br />
+                <b>Kommune:</b> @Model.ReportKommunenavn <br />
+                <b>Fylke:</b> @Model.ReportFylkenavn <br />
+            </div>
+            <br />
+
+
+            <button type="submit" class="report-btn">Lagre endringer</button>
+            <a asp-action="AllMapReportsOverview" class="report-btn secondary">Avbryt</a>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@turf/turf@6.5.0/turf.min.js"></script>
+    <script src="~/js/displayMapReport.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Set Karttype select to correct value from the model
+            const karttypeSelect = document.getElementById('karttypeSelect');
+            const tileLayerInput = document.getElementById('TileLayerId');
+            karttypeSelect.value = "@Model.TileLayerId";
+            tileLayerInput.value = karttypeSelect.value;
+
+            setPreviewMap({
+                mapDivId: "updateMap",
+                center: [58.1467, 7.9956],
+                zoom: 13,
+                tileLayerId: karttypeSelect.value,
+                reportAreaJson: @Html.Raw(Json.Serialize(Model.ReportAreaJson ?? "null"))
+            });
+
+            karttypeSelect.addEventListener("change", function() {
+                tileLayerInput.value = this.value;
+                setPreviewMap({
+                    mapDivId: "updateMap",
+                    center: [58.1467, 7.9956],
+                    zoom: 13,
+                    tileLayerId: this.value,
+                    reportAreaJson: @Html.Raw(Json.Serialize(Model.ReportAreaJson ?? "null"))
+                });
+            });
+        });
+    </script>
 }
-
-
-<h2>Update the user map report</h2>
-
-<form asp-action="UpdateMapReport" method="post">
-    <input type="hidden" asp-for="Id" /> @* This code is used for giving users the opportunity to identify which area they want to change *@
-
-    @* This section consists of four different fields where users can give or edit the data *@
-    <div class="form-group">
-        @* Users can describe the area change *@
-        <label asp-for="ReportDescription">Description</label>
-        <input asp-for="ReportDescription" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        @* JSON-data related to the area can be changes *@
-        <label asp-for="ReportAreaJson">Area JSON</label>
-        <textarea asp-for="ReportAreaJson" class="form-control"></textarea>
-    </div>
-
-    <div class="form-group">
-        @* Let users choose the municipality name for the area change *@
-        <label asp-for="ReportKommunenavn">Kommune</label>
-        <input asp-for="ReportKommunenavn" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        @* Let users choose the county name for the area change *@
-        <label asp-for="ReportFylkenavn">Fylke</label>
-        <input asp-for="ReportFylkenavn" class="form-control" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save Changes</button> @* Let the users save or cancel the changes made *@
-    <a asp-action="AllMapReportsOverview" class="btn btn-secondary">Cancel</a>
-</form>

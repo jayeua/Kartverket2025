@@ -12,8 +12,8 @@ using kartverket2025.Data;
 namespace kartverket2025.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250623224712_initialCreation")]
-    partial class initialCreation
+    [Migration("20250624110132_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

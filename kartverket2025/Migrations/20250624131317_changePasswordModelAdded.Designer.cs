@@ -12,8 +12,8 @@ using kartverket2025.Data;
 namespace kartverket2025.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250624090123_testThis")]
-    partial class testThis
+    [Migration("20250624131317_changePasswordModelAdded")]
+    partial class changePasswordModelAdded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

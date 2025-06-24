@@ -92,10 +92,10 @@ Dette prosjektet er en fullstack-applikasjon inspirert av Kartverket sine behov 
    - På Windows kan du bruke Docker Compose for å starte begge containere.
    - På Mac må du starte MariaDB-container manuelt og kjøre appen fra IDE.
 
-5. Logg inn med seedede testbrukere:
-   - Saksbehandler: `casehandler@test.com` / `CaseHandler@123`
-   - Innmelder: `submitter@test.com` / `Submitter@123`
-   - Admin: `Sysadmin@test.com` / `Test@123`
+5. Logg inn med seeds testbrukere:
+   - Saksbehandler: `casehandler@test.com` / `casehandler123@`
+   - Innmelder: `mapuser@test.com` / `mapuser123@`
+   - Admin: `systemadmin@test.com` / `systemadmin123@`
 
 ### Docker-bruk
 

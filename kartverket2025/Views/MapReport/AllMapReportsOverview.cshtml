@@ -58,10 +58,7 @@
                                     @if (!string.Equals(report.Status, "Completed", StringComparison.OrdinalIgnoreCase) && !string.Equals(report.Status, "Denied", StringComparison.OrdinalIgnoreCase))
                                     {
                                         <a href="@Url.Action("UpdateMapReport", "MapReport", new { id = report.Id })" class="action-btn edit">View</a>
-                                       @*  <form asp-action="FinishReport" asp-controller="MapReport" method="post" onsubmit="return confirm('Are you sure you want to end this report?');">
-                                            <input type="hidden" name="id" value="@report.Id" />
-                                            <button type="submit" class="action-btn end">End</button>
-                                        </form> *@
+                                       
                                     }
                                     <a asp-action="DeleteMapReport" asp-controller="MapReport" asp-route-id="@report.Id" class="action-btn delete">Delete</a>
                                 </div>

@@ -10,12 +10,12 @@
     </div>
     <!-- Info preview -->
     <div class="report-info">
-        <span class="report-title">Delete Map Report</span>
-        <h4>Are you sure you want to delete this map report?</h4>
+        <h5>Are you sure you want to delete this map report?</h5>
+        <span class="report-title">@Model.ReportTitle</span>
         <div class="report-info-table">
             <b>RapportID:</b> @Model.Id <br />
-            <b>Innmelder:</b> @Model.FullName <br />
             <b>Beskrivelse:</b> @Model.ReportDescription <br />
+            <b>Innmelder:</b> @Model.FullName <br />
             <b>Kommune:</b> @Model.ReportKommunenavn <br />
             <b>Fylke:</b> @Model.ReportFylkenavn <br />
             <b>Status:</b> @Model.Status <br />

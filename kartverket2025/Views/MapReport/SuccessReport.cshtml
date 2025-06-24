@@ -1,17 +1,17 @@
-﻿@{
-    ViewData["Title"] = "Report Submitted Successfully";
-}
+﻿<head>
+    <link rel="stylesheet" href="~/css/report.css" />
+</head>
 
-<div class="container mt-5">
-    <div class="alert alert-success text-center" role="alert">
-        <h2 class="mb-3">Thank you!</h2>
+<div class="report-container">
+    <div class="report-message-box">
+        <h2 class="report-title">Thank you!</h2>
         <p>Your map report has been successfully submitted.</p>
     </div>
-    <div class="text-center mt-4">
-        <a href="@Url.Action("AddReport", "MapReport")" class="btn btn-primary">
+    <div class="report-btn-group">
+        <a href="@Url.Action("AddReport", "MapReport")" class="report-btn">
             Submit Another Report
         </a>
-        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary ms-2">
+        <a href="@Url.Action("Index", "Home")" class="report-btn secondary">
             Back to Home
         </a>
     </div>

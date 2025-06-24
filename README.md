@@ -1,31 +1,6 @@
 # Kartverket2025
 
 Kartverketprosjekt – En fullstack webapplikasjon for innmelding og behandling av kartfeil
-
----
-
-## Skjermbilder
-
-Her er noen skjermbilder fra appen:
-
-![Login-side](https://github.com/user-attachments/assets/8e51b534-df7e-473d-89cf-bb7b3779693e)
-![Hjemmeside](https://github.com/user-attachments/assets/4c2f9bbd-9077-4aeb-a3d9-47adf72a4da0)
-![Map User-hjem](https://github.com/user-attachments/assets/4e17ab4c-9bcb-4c9b-a75b-b48255d34ad2)
-![Slett rapport (Case Handler)](https://github.com/user-attachments/assets/6362e534-46bf-4ba9-84c6-c7050ec559bf)
-![Case Handler-hjem](https://github.com/user-attachments/assets/4e62bd4d-d829-4a3a-9eab-3a4f696fa17d)
-![Alle brukere (Systemadmin)](https://github.com/user-attachments/assets/ec0f5131-18b9-4354-bab6-545f49a45ab4)
-![Alle rapporter (Case Handler)](https://github.com/user-attachments/assets/9f5e1081-f612-4deb-ace0-853e340443bb)
-![Legg til rapport (Map User)](https://github.com/user-attachments/assets/35ab037e-73c9-4c90-b06a-d92385115f12)
-![Map User rapporthistorikk](https://github.com/user-attachments/assets/d35ea96c-16ec-4829-aac1-5f692e6a8c4f)
-![Forhåndsvis rapport (Map User)](https://github.com/user-attachments/assets/099a1b92-95f1-43b2-beef-0fb460139f45)
-![Registrer Case Handler](https://github.com/user-attachments/assets/be3d3fcd-6009-4c31-b72c-72591b92dc90)
-![Registrer Map User](https://github.com/user-attachments/assets/5840aef8-2061-4bf4-ab4f-2dadcb15ef9a)
-![Innmelding suksess (Map User)](https://github.com/user-attachments/assets/72e2d434-46ef-476d-843b-78b0f92fa75b)
-![Systemadmin-hjem](https://github.com/user-attachments/assets/ddc861ee-eba1-46d6-a3b5-e28fa13f2310)
-![Se rapport (Case Handler)](https://github.com/user-attachments/assets/b3af82ca-faab-48d7-8e3f-3c6296f66749)
-
----
-
 ## Innholdsfortegnelse
 
 - [Oversikt](#oversikt)

@@ -5,7 +5,7 @@
 namespace kartverket2025.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateToAppUserThree : Migration
+    public partial class testThis : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

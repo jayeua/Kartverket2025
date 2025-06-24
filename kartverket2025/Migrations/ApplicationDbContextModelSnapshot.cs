@@ -293,6 +293,10 @@ namespace kartverket2025.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("AreaJson")
                         .HasColumnType("nvarchar(max)");
 
@@ -314,7 +318,7 @@ namespace kartverket2025.Migrations
                     b.Property<string>("Kommunenavn")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MapPriorityStatusModelId")
+                    b.Property<int?>("MapPriorityStatusId")
                         .HasColumnType("int");
 
                     b.Property<int>("MapReportStatusId")
@@ -326,12 +330,11 @@ namespace kartverket2025.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("MapPriorityStatusModelId");
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("MapPriorityStatusId");
 
                     b.HasIndex("MapReportStatusId");
 
@@ -357,7 +360,7 @@ namespace kartverket2025.Migrations
                         new
                         {
                             Id = 1,
-                            Status = "Waiting"
+                            Status = "Under way..."
                         },
                         new
                         {
@@ -367,12 +370,12 @@ namespace kartverket2025.Migrations
                         new
                         {
                             Id = 3,
-                            Status = "Finished"
+                            Status = "Completed"
                         },
                         new
                         {
                             Id = 4,
-                            Status = "Revoked"
+                            Status = "Denied"
                         });
                 });
 
@@ -478,15 +481,23 @@ namespace kartverket2025.Migrations
 
             modelBuilder.Entity("kartverket2025.Models.DomainModels.MapReportModel", b =>
                 {
+                    b.HasOne("kartverket2025.Models.DomainModels.ApplicationUser", "ApplicationUserModel")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("kartverket2025.Models.DomainModels.MapPriorityStatus", "MapPriorityStatusModel")
                         .WithMany()
-                        .HasForeignKey("MapPriorityStatusModelId");
+                        .HasForeignKey("MapPriorityStatusId");
 
                     b.HasOne("kartverket2025.Models.DomainModels.MapReportStatus", "MapReportStatusModel")
                         .WithMany()
                         .HasForeignKey("MapReportStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUserModel");
 
                     b.Navigation("MapPriorityStatusModel");
 

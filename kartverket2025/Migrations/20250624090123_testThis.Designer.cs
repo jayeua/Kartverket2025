@@ -12,8 +12,8 @@ using kartverket2025.Data;
 namespace kartverket2025.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250601081652_UpdateToAppUser")]
-    partial class UpdateToAppUser
+    [Migration("20250624090123_testThis")]
+    partial class testThis
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,29 @@ namespace kartverket2025.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "1",
+                            Name = "System Admin",
+                            NormalizedName = "SYSTEM ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "2",
+                            Name = "Case Handler",
+                            NormalizedName = "CASE HANDLER"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            ConcurrencyStamp = "3",
+                            Name = "Map User",
+                            NormalizedName = "MAP USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -231,6 +254,183 @@ namespace kartverket2025.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("kartverket2025.Models.DomainModels.MapPriorityStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("PriorityStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MapPriorityStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PriorityStatus = "Low"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PriorityStatus = "Medium"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            PriorityStatus = "High"
+                        });
+                });
+
+            modelBuilder.Entity("kartverket2025.Models.DomainModels.MapReportModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AreaJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CaseHandler")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fylkenavn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Kommunenavn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("MapPriorityStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MapReportStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TileLayerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("MapPriorityStatusId");
+
+                    b.HasIndex("MapReportStatusId");
+
+                    b.ToTable("MapReport");
+                });
+
+            modelBuilder.Entity("kartverket2025.Models.DomainModels.MapReportStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MapReportStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Status = "Under way..."
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Status = "On the way"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Status = "Completed"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Status = "Denied"
+                        });
+                });
+
+            modelBuilder.Entity("kartverket2025.Models.DomainModels.TileLayerModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("KartType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TileLayer");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            KartType = "Topofarge"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            KartType = "Topogråtone"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            KartType = "Turkart"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            KartType = "Sjøkart"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            KartType = "Carto Light"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            KartType = "Carto Dark"
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -280,6 +480,31 @@ namespace kartverket2025.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("kartverket2025.Models.DomainModels.MapReportModel", b =>
+                {
+                    b.HasOne("kartverket2025.Models.DomainModels.ApplicationUser", "ApplicationUserModel")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("kartverket2025.Models.DomainModels.MapPriorityStatus", "MapPriorityStatusModel")
+                        .WithMany()
+                        .HasForeignKey("MapPriorityStatusId");
+
+                    b.HasOne("kartverket2025.Models.DomainModels.MapReportStatus", "MapReportStatusModel")
+                        .WithMany()
+                        .HasForeignKey("MapReportStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUserModel");
+
+                    b.Navigation("MapPriorityStatusModel");
+
+                    b.Navigation("MapReportStatusModel");
                 });
 #pragma warning restore 612, 618
         }

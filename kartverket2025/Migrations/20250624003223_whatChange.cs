@@ -5,7 +5,7 @@
 namespace kartverket2025.Migrations
 {
     /// <inheritdoc />
-    public partial class AddNameToAspNetUsersTable : Migration
+    public partial class whatChange : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

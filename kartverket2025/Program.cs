@@ -12,12 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//connection to mariadb
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        sqlOptions => sqlOptions.CommandTimeout(60) // Set timeout to 60 seconds
-    )
-);
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("MariaDbConnection"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MariaDbConnection"))
+    ));
 
 builder.Services.AddScoped<IMapReportRepository, MapReportRepository>();
 builder.Services.AddScoped<IUsersListRepository, UsersListRepository>();
@@ -31,7 +31,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 8;
-    options.Password.RequireUppercase = false;
+    options.Password.RequireUppercase = true;
 
     options.User.RequireUniqueEmail = true;
     options.SignIn.RequireConfirmedAccount = false;

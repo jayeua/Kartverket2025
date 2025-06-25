@@ -78,7 +78,7 @@ Dette prosjektet er en fullstack-applikasjon inspirert av Kartverket sine behov 
 
 1. Klon dette repositoriet:
    ```sh
-   git clone https://github.com/luckyme28/Kartverket2025.git
+   https://github.com/jayeua/Kartverket2025.git
    ```
 
 2. Konfigurer connection string i `appsettings.json` (se etter `MariaDbConnection`).
@@ -170,4 +170,4 @@ MIT-lisens
 
 ---
 
-> Inspirert av andre studentprosjekter for Kartverket. Utviklet og vedlikeholdt av [luckyme28](https://github.com/luckyme28).
+> Inspirert av andre studentprosjekter for Kartverket. Utviklet og vedlikeholdt av [jayeua](https://github.com/jayeua).

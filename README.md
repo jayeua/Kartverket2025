@@ -159,7 +159,7 @@ Prosjektet følger MVC-arkitektur og repository pattern for å skille logikk, da
 - **C#** – Hovedspråk backend
 - **MariaDB** – Relasjonsdatabase (via Docker)
 - **Entity Framework Core** – ORM, datamigrering og seed-data
-- **Docker** – Containerisering
+- **Docker** – Container
 - **JavaScript, HTML, CSS** – Frontend og kartvisning
 - **Razor Views** – Dynamisk visning
 

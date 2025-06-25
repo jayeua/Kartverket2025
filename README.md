@@ -1,5 +1,5 @@
 # Kartverket2025
-
+![viewmapreportcasehandler](https://github.com/user-attachments/assets/b3af82ca-faab-48d7-8e3f-3c6296f66749)
 Kartverketprosjekt – En fullstack webapplikasjon for innmelding og behandling av kartfeil
 ## Innholdsfortegnelse
 

@@ -50,7 +50,7 @@ Dette prosjektet er en fullstack-applikasjon inspirert av Kartverket sine behov 
    ![Alle rapporter (Case Handler)](https://github.com/user-attachments/assets/9f5e1081-f612-4deb-ace0-853e340443bb)
 4. **Behandle/oppdatere/slette rapporter**  
    ![Slett rapport (Case Handler)](https://github.com/user-attachments/assets/6362e534-46bf-4ba9-84c6-c7050ec559bf)
-   ![Se rapport (Case Handler)](![viewmapreportcasehandler](https://github.com/user-attachments/assets/6b0976a2-8819-4bd0-b9cd-740d1c42e0b0)
+   ![Se rapport (Case Handler)]()
 )
 
 ---

@@ -10,6 +10,7 @@ Kartverketprosjekt – En fullstack webapplikasjon for innmelding og behandling 
   - [For systemadministrator](#for-systemadministrator)
 - [Oppsett og installasjon](#oppsett-og-installasjon)
 - [Arkitektur og struktur](#arkitektur-og-struktur)
+- [Systemstruktur](systemstruktur)
 - [Teknologier](#teknologier)
 - [Lisens](#lisens)
 

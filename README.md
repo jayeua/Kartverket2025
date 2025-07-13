@@ -131,6 +131,13 @@ Når man bruker databasen `kartverketdb` og lister opp tabeller, vises alle tabe
 ![kartverketdbtables](https://github.com/user-attachments/assets/16b66a48-dd38-4087-b299-94a345c718da)
 
 ---
+#### UnitTesting
+
+![unittesting](https://github.com/user-attachments/assets/20de55da-951c-470c-b5d4-8e35d7883e84)
+
+Bildet over viser unit-testene for `MapReportController` i prosjektet, gjennomført med xUnit og Moq (via NPManager). Alle testene har bestått, og dekker typiske operasjoner som å legge til, oppdatere, forhåndsvise og slette kartfeilrapporter, samt å hente brukerrapporthistorikk. Dette sikrer at kjernefunksjonaliteten i controlleren fungerer som forventet.
+
+---
 
 Eksempel på innholdet i tabellen `mapreportstatus`, som definerer mulige statuser for kartfeilrapporter (`Under way`, `On the way`, `Completed`, `Denied`):
 
@@ -144,6 +151,7 @@ Eksempel på innholdet i tabellen `mapprioritystatus`, hvor rapporter kan ha pri
 
 
 ---
+
 
 ## Arkitektur og struktur
 
@@ -177,7 +185,7 @@ Prosjektet følger MVC-arkitektur og repository pattern for å skille logikk, da
 | **Migrations**       | Inneholder automatisk generert kode for Entity Framework migrasjoner.                             |
 | **wwwroot**          | Inneholder statiske filer som JavaScript, CSS og bilder.                                          |
 | **Views**            | Razor views som presenterer data i brukergrensesnittet.                                           |
-
+| **UnitTests**        | Enhetstester gjennomført med xUnit og Moq for å sikre stabilitet og korrekthet i koden.           |
 ---
 
 ## Teknologier

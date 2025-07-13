@@ -25,17 +25,19 @@ Dette prosjektet er en fullstack-applikasjon inspirert av Kartverket sine behov 
 
 ### For innmeldere (Map User)
 
-1. **Logg inn eller registrer deg**  
+1. **Logg inn eller registrer deg**
+   ####
    ![Registrer Map User](https://github.com/user-attachments/assets/5840aef8-2061-4bf4-ab4f-2dadcb15ef9a)
-2. **Hjemmeside for Map User**  
+3. **Hjemmeside for Map User**
+   ####  
    ![Map User-hjem](https://github.com/user-attachments/assets/4e17ab4c-9bcb-4c9b-a75b-b48255d34ad2)
-3. **Meld inn kartfeil via kart og skjema**  
+5. **Meld inn kartfeil via kart og skjema**  
    ![Legg til rapport (Map User)](https://github.com/user-attachments/assets/a2cd0393-4c96-449a-b6df-10335567884e)
-4. **Forhåndsvis og bekreft innmelding**  
+6. **Forhåndsvis og bekreft innmelding**  
    ![Forhåndsvis rapport (Map User)](https://github.com/user-attachments/assets/099a1b92-95f1-43b2-beef-0fb460139f45)
-5. **Se historikk over egne innmeldinger**  
+7. **Se historikk over egne innmeldinger**  
    ![Map User rapporthistorikk](https://github.com/user-attachments/assets/d35ea96c-16ec-4829-aac1-5f692e6a8c4f)
-6. **Motta bekreftelse på innmelding**
+8. **Motta bekreftelse på innmelding**
    ![Innmeldings suksess (Map User)](https://github.com/user-attachments/assets/0a95f36b-492c-42e9-9bad-f0bce5813393)
 
 

@@ -131,13 +131,6 @@ Når man bruker databasen `kartverketdb` og lister opp tabeller, vises alle tabe
 ![kartverketdbtables](https://github.com/user-attachments/assets/16b66a48-dd38-4087-b299-94a345c718da)
 
 ---
-#### UnitTesting
-
-![unittesting](https://github.com/user-attachments/assets/20de55da-951c-470c-b5d4-8e35d7883e84)
-
-Bildet over viser unit-testene for `MapReportController` i prosjektet, gjennomført med xUnit og Moq (via NPManager). Alle testene har bestått, og dekker typiske operasjoner som å legge til, oppdatere, forhåndsvise og slette kartfeilrapporter, samt å hente brukerrapporthistorikk. Dette sikrer at kjernefunksjonaliteten i controlleren fungerer som forventet.
-
----
 
 Eksempel på innholdet i tabellen `mapreportstatus`, som definerer mulige statuser for kartfeilrapporter (`Under way`, `On the way`, `Completed`, `Denied`):
 
@@ -149,6 +142,14 @@ Eksempel på innholdet i tabellen `mapprioritystatus`, hvor rapporter kan ha pri
 
 ![showingtablestwoexample](https://github.com/user-attachments/assets/d8451da1-e13e-468d-849a-e5580cf9c6c1)
 
+
+---
+
+#### Unit testing
+
+![unittesting](https://github.com/user-attachments/assets/20de55da-951c-470c-b5d4-8e35d7883e84)
+
+Bildet over viser unit-testene for `MapReportController` i prosjektet, gjennomført med xUnit og Moq (via NPManager). Alle testene har bestått, og dekker typiske operasjoner som å legge til, oppdatere, forhåndsvise og slette kartfeilrapporter, samt å hente brukerrapporthistorikk. Dette sikrer at kjernefunksjonaliteten i controlleren fungerer som forventet.
 
 ---
 

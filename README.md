@@ -132,19 +132,19 @@ I `appsettings.json` må følgende settes:
 
 ![kartverketdbInMariaDb1](https://github.com/user-attachments/assets/3d384612-33b9-4e63-ac01-e62f5deab6aa)
 
----
+
 
 **2. Når man bruker databasen `kartverketdb` og lister opp tabeller,** vises alle tabeller som applikasjonen forventer – inkludert `aspnet`-brukertabeller og prosjektspesifikke tabeller:
 
 ![kartverketdbtables](https://github.com/user-attachments/assets/16b66a48-dd38-4087-b299-94a345c718da)
 
----
+
 
 **3. Eksempel på innholdet i tabellen `mapreportstatus`,** som definerer mulige statuser for kartfeilrapporter (`Under way`, `On the way`, `Completed`, `Denied`):
 
 ![showingtablesoneexample](https://github.com/user-attachments/assets/a162836e-f99e-4e0e-a5f1-706d2c1851a7)
 
----
+
 
 **4. Eksempel på innholdet i tabellen `mapprioritystatus`,** hvor rapporter kan ha prioritet satt til `Low`, `Medium` eller `High`:
 

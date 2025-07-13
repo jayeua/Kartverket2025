@@ -14,6 +14,8 @@ Kartverketprosjekt – En fullstack webapplikasjon for innmelding og behandling 
 - [Lisens](#lisens)
 
 ---
+<img width="393" height="292" alt="kartverketdbInMariaDb1" src="https://github.com/user-attachments/assets/3d384612-33b9-4e63-ac01-e62f5deab6aa" />
+
 
 ## Oversikt
 

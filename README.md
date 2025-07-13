@@ -35,8 +35,9 @@ Dette prosjektet er en fullstack-applikasjon inspirert av Kartverket sine behov 
    ![Forhåndsvis rapport (Map User)](https://github.com/user-attachments/assets/099a1b92-95f1-43b2-beef-0fb460139f45)
 5. **Se historikk over egne innmeldinger**  
    ![Map User rapporthistorikk](https://github.com/user-attachments/assets/d35ea96c-16ec-4829-aac1-5f692e6a8c4f)
-6. **Motta bekreftelse på innmelding**  
-   ![Innmelding suksess (Map User)](https://github.com/user-attachments/assets/72e2d434-46ef-476d-843b-78b0f92fa75b)
+6. **Motta bekreftelse på innmelding**
+   ![Innmeldings suksess (Map User)](https://github.com/user-attachments/assets/0a95f36b-492c-42e9-9bad-f0bce5813393)
+
 
 ---
 
@@ -50,7 +51,8 @@ Dette prosjektet er en fullstack-applikasjon inspirert av Kartverket sine behov 
    ![Alle rapporter (Case Handler)](https://github.com/user-attachments/assets/9f5e1081-f612-4deb-ace0-853e340443bb)
 4. **Behandle/oppdatere/slette rapporter**
    ![Se rapport (Case Handler)](https://github.com/user-attachments/assets/7a12095f-e359-4cf9-84a6-98ffde875389)
-   ![Slett rapport (Case Handler)](https://github.com/user-attachments/assets/6362e534-46bf-4ba9-84c6-c7050ec559bf)
+   ![Slett rapport (Case Handler)](https://github.com/user-attachments/assets/c685b7ed-3cf7-4501-9308-767a6e00bef1)
+
    
 
 ---

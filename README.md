@@ -120,17 +120,17 @@ I `appsettings.json` må følgende settes:
 
 #### Eksempler på MariaDB databaseoppsett og innhold
 
+Viser tilgjengelige databaser i MariaDB. Her ser vi at `kartverketdb` er opprettet og klar til bruk.
 <img width="393" height="292" alt="kartverketdbInMariaDb1" src="https://github.com/user-attachments/assets/3d384612-33b9-4e63-ac01-e62f5deab6aa" />
-**Viser tilgjengelige databaser i MariaDB. Her ser vi at `kartverketdb` er opprettet og klar til bruk.**
 
+Når vi bruker databasen `kartverketdb` og lister opp tabeller, vises alle tabeller som applikasjonen forventer, inkludert aspnet-brukertabeller og prosjektspesifikke tabeller.
 <img width="439" height="472" alt="kartverketdbtables" src="https://github.com/user-attachments/assets/16b66a48-dd38-4087-b299-94a345c718da" />
-**Når vi bruker databasen `kartverketdb` og lister opp tabeller, vises alle tabeller som applikasjonen forventer, inkludert aspnet-brukertabeller og prosjektspesifikke tabeller.**
 
+Eksempel på innholdet i tabellen `mapreportstatus`, som definerer mulige statuser for kartfeilrapporter (Under way, On the way, Completed, Denied).
 <img width="515" height="198" alt="showingtablesoneexample" src="https://github.com/user-attachments/assets/a162836e-f99e-4e0e-a5f1-706d2c1851a7" />
-**Eksempel på innholdet i tabellen `mapreportstatus`, som definerer mulige statuser for kartfeilrapporter (Under way, On the way, Completed, Denied).**
 
+Eksempel på innholdet i tabellen `mapprioritystatus`, hvor rapporter kan ha prioritet satt til Low, Medium eller High.
 <img width="516" height="197" alt="showingtablestwoexample" src="https://github.com/user-attachments/assets/d8451da1-e13e-468d-849a-e5580cf9c6c1" />
-**Eksempel på innholdet i tabellen `mapprioritystatus`, hvor rapporter kan ha prioritet satt til Low, Medium eller High.**
 
 ---
 

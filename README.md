@@ -30,7 +30,7 @@ Dette prosjektet er en fullstack-applikasjon inspirert av Kartverket sine behov 
 2. **Hjemmeside for Map User**  
    ![Map User-hjem](https://github.com/user-attachments/assets/4e17ab4c-9bcb-4c9b-a75b-b48255d34ad2)
 3. **Meld inn kartfeil via kart og skjema**  
-   ![Legg til rapport (Map User)](https://github.com/user-attachments/assets/35ab037e-73c9-4c90-b06a-d92385115f12)
+   ![Legg til rapport (Map User)](https://github.com/user-attachments/assets/a2cd0393-4c96-449a-b6df-10335567884e)
 4. **Forhåndsvis og bekreft innmelding**  
    ![Forhåndsvis rapport (Map User)](https://github.com/user-attachments/assets/099a1b92-95f1-43b2-beef-0fb460139f45)
 5. **Se historikk over egne innmeldinger**  
@@ -50,10 +50,8 @@ Dette prosjektet er en fullstack-applikasjon inspirert av Kartverket sine behov 
 3. **Se oversikt over alle rapporter**
    ![Alle rapporter (Case Handler)](https://github.com/user-attachments/assets/9f5e1081-f612-4deb-ace0-853e340443bb)
 4. **Behandle/oppdatere/slette rapporter**
-   ![Se rapport (Case Handler)](https://github.com/user-attachments/assets/7a12095f-e359-4cf9-84a6-98ffde875389)
-   ![Slett rapport (Case Handler)](https://github.com/user-attachments/assets/c685b7ed-3cf7-4501-9308-767a6e00bef1)
-
-   
+   ![Se rapport (Case Handler)](https://github.com/user-attachments/assets/ad29b89d-6589-49ae-8bd7-a4e8a2a6e833)
+   ![Slett rapport (Case Handler)](https://github.com/user-attachments/assets/b738c9c9-c2cb-4a94-894c-0029ec1ef77e)
 
 ---
 

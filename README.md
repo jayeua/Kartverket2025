@@ -202,13 +202,17 @@ Prosjektet følger MVC-arkitektur og repository pattern for å skille logikk, da
 
 ## Teknologier
 
-- **ASP.NET Core MVC 8.0** – Backend og autentisering
-- **C#** – Hovedspråk backend
-- **MariaDB** – Relasjonsdatabase (via Docker)
-- **Entity Framework Core** – ORM, datamigrering og seed-data
-- **Docker** – Container
-- **JavaScript, HTML, CSS** – Frontend og kartvisning
-- **Razor Views** – Dynamisk visning
+- **ASP.NET Core MVC 8.0** – Rammeverk for backend, struktur og autentisering
+- **C#** – Hovedspråk for forretningslogikk og backend-funksjonalitet
+- **Entity Framework Core** – ORM for databasehåndtering, migrasjoner og seed-data
+- **ASP.NET Identity** – Håndtering av brukerpålogging, roller og sikkerhet
+- **MariaDB** – Relasjonsdatabase, kjøres i Docker-container
+- **Docker** – Containerplattform for enkel kjøring og distribusjon av applikasjon og database
+- **JavaScript, HTML, CSS** – Frontend-teknologier for UI og interaktivitet
+- **Leaflet** – JavaScript-bibliotek for interaktive kart
+- **Kartverket API** – Kart- og geodata levert av Kartverket
+- **Razor Views** – Dynamisk generering av HTML-visninger i ASP.NET
+
 
 ---
 

@@ -126,7 +126,7 @@ Viser tilgjengelige databaser i MariaDB. Her ser vi at `kartverketdb` er opprett
 
 ---
 
-Når vi bruker databasen `kartverketdb` og lister opp tabeller, vises alle tabeller som applikasjonen forventer – inkludert `aspnet`-brukertabeller og prosjektspesifikke tabeller:
+Når man bruker databasen `kartverketdb` og lister opp tabeller, vises alle tabeller som applikasjonen forventer – inkludert `aspnet`-brukertabeller og prosjektspesifikke tabeller:
 
 ![kartverketdbtables](https://github.com/user-attachments/assets/16b66a48-dd38-4087-b299-94a345c718da)
 

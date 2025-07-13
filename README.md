@@ -148,9 +148,10 @@ I `appsettings.json` må følgende settes:
 ## Unit testing
 
 
-#### Bildet nede viser unit-testene for `MapReportController` i prosjektet, gjennomført med xUnit og Moq.
+**Bildet nede viser unit-testene for `MapReportController` i prosjektet, gjennomført med xUnit og Moq.**
 ![unittesting](https://github.com/user-attachments/assets/20de55da-951c-470c-b5d4-8e35d7883e84)
-#### Alle testene har bestått, og dekker typiske operasjoner som å legge til, oppdatere, forhåndsvise og slette kartfeilrapporter, samt å hente brukerrapporthistorikk. Dette sikrer at kjernefunksjonaliteten i controlleren fungerer som forventet.
+####
+Alle testene har bestått, og dekker typiske operasjoner som å legge til, oppdatere, forhåndsvise og slette kartfeilrapporter, samt å hente brukerrapporthistorikk. Dette sikrer at kjernefunksjonaliteten i controlleren fungerer som forventet.
 
 ---
 

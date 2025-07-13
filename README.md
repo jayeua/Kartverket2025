@@ -124,7 +124,6 @@ docker run --name mariadb \
 I `appsettings.json` må følgende settes:
 - `MariaDbConnection`: Connection string til MariaDB-databasen
 
----
 
 ### Eksempler på MariaDB databaseoppsett og innhold
 

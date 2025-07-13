@@ -126,7 +126,7 @@ I `appsettings.json` må følgende settes:
 
 ---
 
-## Eksempler på MariaDB databaseoppsett og innhold
+### Eksempler på MariaDB databaseoppsett og innhold
 
 **1. Viser tilgjengelige databaser i MariaDB.** Her ser vi at `kartverketdb` er opprettet og klar til bruk:
 

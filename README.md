@@ -197,7 +197,7 @@ Prosjektet følger MVC-arkitektur og repository pattern for å skille logikk, da
 | **Migrations**       | Inneholder automatisk generert kode for Entity Framework migrasjoner.                             |
 | **wwwroot**          | Inneholder statiske filer som JavaScript, CSS og bilder.                                          |
 | **Views**            | Razor views som presenterer data i brukergrensesnittet.                                           |
-| **UnitTests**        | Enhetstester gjennomført med xUnit og Moq for å sikre stabilitet og korrekthet i koden.           |
+| **kartverket2025.unitTests**        | Enhetstester gjennomført med xUnit og Moq for å sikre stabilitet og korrekthet i koden.           |
 ---
 
 ## Teknologier

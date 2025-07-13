@@ -120,16 +120,16 @@ I `appsettings.json` må følgende settes:
 
 #### Eksempler på MariaDB databaseoppsett og innhold
 
-Viser tilgjengelige databaser i MariaDB. Her ser vi at `kartverketdb` er opprettet og klar til bruk.
+**Viser tilgjengelige databaser i MariaDB. Her ser vi at `kartverketdb` er opprettet og klar til bruk.**
 ![kartverketdbInMariaDb1](https://github.com/user-attachments/assets/3d384612-33b9-4e63-ac01-e62f5deab6aa)
 
-Når vi bruker databasen `kartverketdb` og lister opp tabeller, vises alle tabeller som applikasjonen forventer, inkludert aspnet-brukertabeller og prosjektspesifikke tabeller.
+**Når vi bruker databasen `kartverketdb` og lister opp tabeller, vises alle tabeller som applikasjonen forventer, inkludert aspnet-brukertabeller og prosjektspesifikke tabeller.**
 ![kartverketdbtables](https://github.com/user-attachments/assets/16b66a48-dd38-4087-b299-94a345c718da)
 
-Eksempel på innholdet i tabellen `mapreportstatus`, som definerer mulige statuser for kartfeilrapporter (Under way, On the way, Completed, Denied).
+**Eksempel på innholdet i tabellen `mapreportstatus`, som definerer mulige statuser for kartfeilrapporter (Under way, On the way, Completed, Denied).**
 ![showingtablesoneexample](https://github.com/user-attachments/assets/a162836e-f99e-4e0e-a5f1-706d2c1851a7)
 
-Eksempel på innholdet i tabellen `mapprioritystatus`, hvor rapporter kan ha prioritet satt til Low, Medium eller High.
+**Eksempel på innholdet i tabellen `mapprioritystatus`, hvor rapporter kan ha prioritet satt til Low, Medium eller High.**
 ![showingtablestwoexample](https://github.com/user-attachments/assets/d8451da1-e13e-468d-849a-e5580cf9c6c1)
 
 ---

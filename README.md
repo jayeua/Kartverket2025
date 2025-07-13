@@ -26,45 +26,50 @@ Dette prosjektet er en fullstack-applikasjon inspirert av Kartverket sine behov 
 ### For innmeldere (Map User)
 
 1. **Logg inn eller registrer deg**
-   ####
    ![Registrer Map User](https://github.com/user-attachments/assets/5840aef8-2061-4bf4-ab4f-2dadcb15ef9a)
-3. **Hjemmeside for Map User**
-   ####  
+   ####
+2. **Hjemmeside for Map User**
    ![Map User-hjem](https://github.com/user-attachments/assets/4e17ab4c-9bcb-4c9b-a75b-b48255d34ad2)
-5. **Meld inn kartfeil via kart og skjema**  
+   ####
+3. **Meld inn kartfeil via kart og skjema**  
    ![Legg til rapport (Map User)](https://github.com/user-attachments/assets/a2cd0393-4c96-449a-b6df-10335567884e)
-6. **Forhåndsvis og bekreft innmelding**  
+4. **Forhåndsvis og bekreft innmelding**  
    ![Forhåndsvis rapport (Map User)](https://github.com/user-attachments/assets/099a1b92-95f1-43b2-beef-0fb460139f45)
-7. **Se historikk over egne innmeldinger**  
+   ####
+5. **Se historikk over egne innmeldinger**  
    ![Map User rapporthistorikk](https://github.com/user-attachments/assets/d35ea96c-16ec-4829-aac1-5f692e6a8c4f)
-8. **Motta bekreftelse på innmelding**
+   ####
+6. **Motta bekreftelse på innmelding**
    ![Innmeldings suksess (Map User)](https://github.com/user-attachments/assets/0a95f36b-492c-42e9-9bad-f0bce5813393)
-
-
+   ####
 ---
 
 ### For saksbehandlere (Case Handler)
 
 1. **Logg inn eller registrer deg som saksbehandler**  
    ![Registrer Case Handler](https://github.com/user-attachments/assets/be3d3fcd-6009-4c31-b72c-72591b92dc90)
+####
 2. **Hjemmeside for Case Handler**  
    ![Case Handler-hjem](https://github.com/user-attachments/assets/4e62bd4d-d829-4a3a-9eab-3a4f696fa17d)
+####
 3. **Se oversikt over alle rapporter**
    ![Alle rapporter (Case Handler)](https://github.com/user-attachments/assets/5adf9a04-934b-4929-bc74-358203e19d64)
-5. **Behandle/oppdatere/slette rapporter**
+####
+4. **Behandle/oppdatere/slette rapporter**
    ![Se rapport (Case Handler)](https://github.com/user-attachments/assets/ad29b89d-6589-49ae-8bd7-a4e8a2a6e833)
    ![Slett rapport (Case Handler)](https://github.com/user-attachments/assets/eea1bd53-f038-4663-ae22-92b1f20e350a)
-
+####
 ---
 
 ### For systemadministrator
 
 1. **Logg inn som admin**  
    ![Login-side](https://github.com/user-attachments/assets/8e51b534-df7e-473d-89cf-bb7b3779693e)
+####
 2. **Admin-hjemmeside og brukerliste**  
    ![Systemadmin-hjem](https://github.com/user-attachments/assets/ddc861ee-eba1-46d6-a3b5-e28fa13f2310)
    ![Alle brukere (Systemadmin)](https://github.com/user-attachments/assets/ec0f5131-18b9-4354-bab6-545f49a45ab4)
-
+####
 ---
 
 ## Oppsett og installasjon

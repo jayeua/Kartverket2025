@@ -218,4 +218,4 @@ MIT-lisens
 
 ---
 
-> Inspirert av andre studentprosjekter for Kartverket. Utviklet og vedlikeholdt av [jayeua](https://github.com/jayeua).
+> Utviklet og vedlikeholdt av [jayeua](https://github.com/jayeua).

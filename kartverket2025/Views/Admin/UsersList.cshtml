@@ -40,6 +40,7 @@
                                     <form method="post"
                                           asp-controller="Admin"
                                           asp-action="DelUser" asp-route-id="@user.Id">
+                                        @Html.AntiForgeryToken()
                                         <button class="action-btn delete"
                                                 onclick="return confirm ('Are you sure u wanna delete this user?');"
                                                 type="submit">

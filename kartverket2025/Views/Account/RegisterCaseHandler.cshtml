@@ -6,6 +6,7 @@
     <div class="login-card register-card">
         <h1 class="login-title">Register as a case handler</h1>
         <form method="post" asp-controller="Account" asp-action="RegisterCaseHandler">
+            @Html.AntiForgeryToken()
             <p class="login-subtitle">Create new account</p>
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">

@@ -25,6 +25,7 @@
     <div class="report-info">
         <span class="report-title">Add Report</span>
         <form asp-action="PreviewReport" method="post">
+            @Html.AntiForgeryToken()
             <input type="hidden" asp-for="TileLayerId" id="tileLayerInput" />
             <input type="hidden" id="geoJsonInput" asp-for="ReportAreaJson" />
             <label for="title" class="report-label">Tittel</label>

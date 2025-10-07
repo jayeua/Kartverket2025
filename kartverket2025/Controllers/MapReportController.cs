@@ -29,6 +29,7 @@ namespace kartverket2025.Controllers
 
         [Authorize(Roles = "Map User, Case Handler")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddReport(MapReportViewModel mapReportViewModel)
         {
             var currentUser = await _userManager.GetUserAsync(User);
@@ -65,6 +66,7 @@ namespace kartverket2025.Controllers
 
         [Authorize(Roles = "Map User, Case Handler")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult PreviewReport(MapReportViewModel mapReportViewModel)
         {
             // You might want to validate here, but for now just show the preview
@@ -73,6 +75,7 @@ namespace kartverket2025.Controllers
 
         [Authorize(Roles = "Map User, Case Handler")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfirmReport(MapReportViewModel mapReportViewModel)
         {
             var currentUser = await _userManager.GetUserAsync(User);
@@ -369,6 +372,7 @@ namespace kartverket2025.Controllers
 
         [Authorize(Roles = "Map User, Case Handler")]
         [HttpPost, ActionName("DeleteMapReport")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteMapReportConfirmed(int id)
         {
             await _mapReportRepository.DeleteReportAsync(id);

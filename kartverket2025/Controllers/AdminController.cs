@@ -74,6 +74,7 @@ namespace kartverket2025.Controllers
 
         [Authorize(Roles = "System Admin")]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DelUser(string id)
         {
             if (string.IsNullOrEmpty(id))

@@ -35,6 +35,7 @@
                 <button type="submit" class="report-btn secondary">Gå tilbake</button>
             </form>
             <form asp-action="ConfirmReport" method="post" style="display:inline;">
+                @Html.AntiForgeryToken()
                 <input type="hidden" asp-for="ReportTitle" />
                 <input type="hidden" asp-for="ReportDescription" />
                 <input type="hidden" asp-for="ReportKommunenavn" />

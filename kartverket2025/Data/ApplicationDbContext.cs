@@ -75,7 +75,7 @@ namespace kartverket2025.Data
                 FirstName = "System",
                 LastName = "Admin",
             };
-            sysAdminUser.PasswordHash = hasher.HashPassword(sysAdminUser, "systemadmin123@");
+            sysAdminUser.PasswordHash = hasher.HashPassword(sysAdminUser, "Systemadmin123@");
 
             var caseHandlerUser = new ApplicationUser
             {
@@ -87,7 +87,7 @@ namespace kartverket2025.Data
                 FirstName = "Case",
                 LastName = "Handler",
             };
-            caseHandlerUser.PasswordHash = hasher.HashPassword(caseHandlerUser, "casehandler123@");
+            caseHandlerUser.PasswordHash = hasher.HashPassword(caseHandlerUser, "Casehandler123@");
 
             var mapUser = new ApplicationUser
             {
@@ -99,7 +99,7 @@ namespace kartverket2025.Data
                 FirstName = "Map",
                 LastName = "User",
             };
-            mapUser.PasswordHash = hasher.HashPassword(mapUser, "mapuser123@");
+            mapUser.PasswordHash = hasher.HashPassword(mapUser, "Mapuser123@");
 
             // Seed the users
             modelBuilder.Entity<ApplicationUser>().HasData(sysAdminUser, caseHandlerUser, mapUser);

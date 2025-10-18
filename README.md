@@ -102,9 +102,9 @@ Dette prosjektet er en fullstack-applikasjon inspirert av Kartverket sine behov 
    - På Mac må du starte MariaDB-container manuelt og kjøre appen fra IDE.
 
 5. Logg inn med seeds testbrukere:
-   - Saksbehandler: `casehandler@test.com` / `casehandler123@`
-   - Innmelder: `mapuser@test.com` / `mapuser123@`
-   - Admin: `systemadmin@test.com` / `systemadmin123@`
+   - Saksbehandler: `casehandler@test.com` / `Casehandler123@`
+   - Innmelder: `mapuser@test.com` / `Mapuser123@`
+   - Admin: `systemadmin@test.com` / `Systemadmin123@`
 
 ### Docker-bruk
 

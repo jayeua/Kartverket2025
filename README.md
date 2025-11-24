@@ -101,29 +101,55 @@ Dette prosjektet er en fullstack-applikasjon inspirert av Kartverket sine behov 
    - På Windows kan du bruke Docker Compose for å starte begge containere.
    - På Mac må du starte MariaDB-container manuelt og kjøre appen fra IDE.
 
-5. Logg inn med seeds testbrukere:
-   - Saksbehandler: `casehandler@test.com` / `Casehandler123@`
-   - Innmelder: `mapuser@test.com` / `Mapuser123@`
-   - Admin: `systemadmin@test.com` / `Systemadmin123@`
+---
 
 ### Docker-bruk
 
-Applikasjonen og databasen kjøres i separate containere via Docker Compose. For Mac kan det være nødvendig å kjøre MariaDB-container manuelt:
+### Docker-bruk (Rask start)
 
-```sh
-docker run --name mariadb \
-  -e MYSQL_ROOT_PASSWORD=kartverket \
-  -e MYSQL_DATABASE=KartverketDb \
-  -p 3307:3306 \
-  -v mariadb_data:/var/lib/mysql \
-  -d mariadb:latest
-```
+Følg disse korte stegene for å kjøre prosjektet med Docker Compose.
 
-### Miljøvariabler
+1. Åpne Docker Desktop og en terminal (PowerShell/CMD).
+2. Gå til prosjektmappen:
+   ```sh
+   cd C:\path\til\Kartverket2025
+   ```
+   (Se eksempel på terminal etter kommandoen)
+   ![Terminal som kjører docker compose](<img width="1702" height="792" alt="bilde" src="https://github.com/user-attachments/assets/30eecb45-623c-4922-97e0-a4484c28f2e4" />
 
-I `appsettings.json` må følgende settes:
-- `MariaDbConnection`: Connection string til MariaDB-databasen
 
+3. Start og bygg containere:
+   ```sh
+   docker compose up --build
+   ```
+   Eller i bakgrunnen:
+   ```sh
+   docker compose up -d --build
+   ```
+
+4. Åpne Docker Desktop → Containers/Apps. Finn containeren som heter "kartverket2025".
+   ![Container-listen i Docker Desktop](<img width="1645" height="465" alt="bilde" src="https://github.com/user-attachments/assets/fc751f8c-a460-4a61-aa56-62b2f21f2077" />
+)
+
+5. Klikk på kartverket2025 for detaljer. Sjekk at port-mapping viser noe som 8080:8080 (web) og 3307:3306 (MariaDB).
+   ![Container-detaljer med port-mapping](<img width="743" height="495" alt="bilde" src="https://github.com/user-attachments/assets/8e7559c2-483c-487d-9150-300df40de268" />
+)
+
+6. Åpne applikasjonen i nettleser:
+   - Klikk lenken i Docker Desktop eller gå til: http://localhost:8080
+   ![Lenke til http://localhost:8080 i Docker Desktop](<img width="365" height="93" alt="bilde" src="https://github.com/user-attachments/assets/5643c1b7-3b48-4345-8d4d-26d068c8c15d" />
+)
+
+Tips:
+- Sjekk kjørende containere i terminal: docker ps
+- Se logger: docker compose logs -f
+- Stopp alt: docker compose down
+- Hvis MariaDB bruker host-port 3307: koble til localhost:3307 fra din maskin (app internt i nettverket bruker tjenestenavnet, f.eks. "mariadb").
+
+7. Logg inn med seeds testbrukere:
+   - Saksbehandler: `casehandler@test.com` / `Casehandler123@`
+   - Innmelder: `mapuser@test.com` / `Mapuser123@`
+   - Admin: `systemadmin@test.com` / `Systemadmin123@`
 ---
 ## Eksempler på MariaDB databaseoppsett og innhold
 

@@ -115,7 +115,7 @@ Følg disse korte stegene for å kjøre prosjektet med Docker Compose.
    cd C:\path\til\Kartverket2025
    ```
    (Se eksempel på terminal etter kommandoen)
-   ![Terminal som kjører docker compose](<img width="1702" height="792" alt="bilde" src="https://github.com/user-attachments/assets/30eecb45-623c-4922-97e0-a4484c28f2e4" />
+   ![Terminal som kjører docker compose](<img width="1702" height="792" alt="bilde" src="https://github.com/user-attachments/assets/30eecb45-623c-4922-97e0-a4484c28f2e4" />)
 
 
 3. Start og bygg containere:
@@ -128,15 +128,15 @@ Følg disse korte stegene for å kjøre prosjektet med Docker Compose.
    ```
 
 4. Åpne Docker Desktop → Containers/Apps. Finn containeren som heter "kartverket2025".
-   ![Container-listen i Docker Desktop](<img width="1645" height="465" alt="bilde" src="https://github.com/user-attachments/assets/fc751f8c-a460-4a61-aa56-62b2f21f2077" />
+   ![Container-listen i Docker Desktop](<img width="1645" height="465" alt="bilde" src="https://github.com/user-attachments/assets/fc751f8c-a460-4a61-aa56-62b2f21f2077" />)
 
 5. Klikk på kartverket2025 for detaljer. Sjekk at port-mapping viser noe som 8080:8080 (web) og 3307:3306 (MariaDB).
-   ![Container-detaljer med port-mapping](<img width="743" height="495" alt="bilde" src="https://github.com/user-attachments/assets/8e7559c2-483c-487d-9150-300df40de268" />
+   ![Container-detaljer med port-mapping](<img width="743" height="495" alt="bilde" src="https://github.com/user-attachments/assets/8e7559c2-483c-487d-9150-300df40de268" />)
 
 
 6. Åpne applikasjonen i nettleser:
    - Klikk lenken i Docker Desktop eller gå til: http://localhost:8080
-   ![Lenke til http://localhost:8080 i Docker Desktop](<img width="365" height="93" alt="bilde" src="https://github.com/user-attachments/assets/5643c1b7-3b48-4345-8d4d-26d068c8c15d" />
+   ![Lenke til http://localhost:8080 i Docker Desktop](<img width="365" height="93" alt="bilde" src="https://github.com/user-attachments/assets/5643c1b7-3b48-4345-8d4d-26d068c8c15d" />)
 
 7. Logg inn med seeds testbrukere:
    - Saksbehandler: `casehandler@test.com` / `Casehandler123@`

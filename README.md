@@ -135,8 +135,8 @@ Følg disse korte stegene for å kjøre prosjektet med Docker Compose.
 
 
 6. Åpne applikasjonen i nettleser:
-   - Klikk lenken i Docker Desktop eller gå til: http://localhost:8080
-   ![Lenke til http://localhost:8080 i Docker Desktop](https://github.com/user-attachments/assets/5643c1b7-3b48-4345-8d4d-26d068c8c15d)
+![Lenke til http://localhost:8080 i Docker Desktop](https://github.com/user-attachments/assets/5643c1b7-3b48-4345-8d4d-26d068c8c15d)
+- Klikk lenken i Docker Desktop eller gå til: http://localhost:8080
 ![testgif](https://github.com/user-attachments/assets/290a04b7-6769-47c3-9f6e-a6e717b2a491)
 
 7. Logg inn med seeds testbrukere:

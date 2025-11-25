@@ -14,6 +14,7 @@ services:
       - ConnectionStrings__MariaDbConnection=Server=mariadb;Database=KartverketDb;User=root;Password=kartverketdb
     depends_on:
       - mariadb
+    restart: always
 
   mariadb:
     image: mariadb:latest
